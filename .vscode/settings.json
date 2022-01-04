@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "gui.h": "c",
+        "glcd.h": "c"
+    }
+}
