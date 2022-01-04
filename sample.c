@@ -40,42 +40,36 @@ extern uint8_t
 
 int main(void) {
 
-	uint32_t rit_time = 0x004C4B40;
-	uint32_t timer0_time = 0x00098968;
-	// TODO: CALCULATE TIMES BASED ON fps "CONSTANT"
-	#ifdef SIMULATOR
-		rit_time = 0x001C4B40;
-		timer0_time = 0x08968;
-	#endif
-	
-	game_status = NOT_PLAYING;
+    uint32_t rit_time;
+    uint32_t timer0_time;
+
+    rit_time = 0x4C4B40;
+    timer0_time = 0x98968;
+    // TODO: CALCULATE TIMES BASED ON fps "CONSTANT"
+    #ifdef SIMULATOR
+        timer0_time = 0xCB735; // 30 FPS // 2500000 / fps;
+            rit_time =  (100000000 / paddle_fps);  // 6 FPS: FE 502A
+    #endif
+
+    game_status = NOT_PLAYING;
 	
 	SystemInit(); /* System Initialization (i.e., PLL)  */
 
-  LCD_Initialization();
-  init_GUI();
-  ADC_init();           /* ADC Initialization 					*/
-  init_RIT(rit_time); 
-	init_timer(0, timer0_time, 0);
-	
-  enable_RIT();         /* RIT enabled         						*/
-	enable_timer(0);	// Timer 0: Move ball
-	
+    LCD_Initialization();
+    init_GUI();
+    ADC_init();           /* ADC Initialization 					*/
+    init_RIT(rit_time);
+    init_timer(0, timer0_time, 0);
 
-  // init_timer(0, 0x1312D0 ); 						/* 50ms
-  // * 25MHz = 1.25*10^6 = 0x1312D0 */ init_timer(0, 0x6108 );
-  // /* 1ms * 25MHz = 25*10^3 = 0x6108 */ init_timer(0, 0x4E2 );
-  // /* 500us * 25MHz = 1.25*10^3 = 0x4E2 */
-  //init_timer(0, 0xC8); /* 8us * 25MHz = 200 ~= 0xC8 */
-  //enable_timer(0);
+    enable_RIT();         /* RIT enabled         						*/
+    enable_timer(0);	// Timer 0: Move ball
 
-  LPC_SC->PCON |= 0x1; /* power-down	mode
-                        */
-  LPC_SC->PCON &= ~(0x2);
+	LPC_SC->PCON |= 0x1; /* power-down mode */
+    LPC_SC->PCON &= ~(0x2);
 
-  while (1) {
-    __ASM("wfi");
-  }
+    while (1) {
+        __ASM("wfi");
+    }
 }
 
 /*********************************************************************************************************

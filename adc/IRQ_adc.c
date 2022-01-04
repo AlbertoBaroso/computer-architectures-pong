@@ -90,3 +90,32 @@ void ADC_IRQHandler(void) {
 	}
 	AD_last = AD_current;
 }
+
+/*
+unsigned short AD_current;
+unsigned short AD_last = 0xFF;
+
+uint16_t measures[3];
+unsigned short measure_index = 0;
+
+void ADC_IRQHandler(void) {
+    int max_value =
+            field_width - paddle_width - 1; // Display width - paddle width
+
+    // current_position GENERATED IS IN RANGE [0, 209]
+
+    AD_current = ((LPC_ADC->ADGDR >> 4) & 0xFFF); // Read Conversion Result
+
+    measures[measure_index] = AD_current;
+    measure_index = (measure_index + 1) % 3;
+
+    if (AD_current != AD_last) {
+        uint16_t last_position = AD_last * max_value / 0xFFF;
+        paddle_x = AD_current * max_value / 0xFFF;
+        draw_paddle(last_position, paddle_x);
+        AD_last = AD_current;
+    }
+
+
+}
+*/
