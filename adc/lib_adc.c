@@ -1,12 +1,13 @@
 #include "lpc17xx.h"
 #include "adc.h"
+#include "../priority/priority.h"
 
 /*----------------------------------------------------------------------------
   Function that initializes ADC
  *----------------------------------------------------------------------------*/
 void ADC_init (void) {
 
-  LPC_PINCON->PINSEL3 |=  (3UL<<30);      /* P1.31 is AD0.5                     */
+  LPC_PINCON->PINSEL3 |=  (3UL<<30);    /* P1.31 is AD0.5                     */
 
   LPC_SC->PCONP       |=  (1<<12);      /* Enable power to ADC block          */
 
@@ -17,8 +18,9 @@ void ADC_init (void) {
   LPC_ADC->ADINTEN     =  (1<< 8);      /* global enable interrupt            */
 
   NVIC_EnableIRQ(ADC_IRQn);             /* enable ADC Interrupt               */
+	NVIC_SetPriority(ADC_IRQn, ADC_priority);			/* setting ADC priority        			  */
 }
 
 void ADC_start_conversion (void) {
-	LPC_ADC->ADCR |=  (1<<24);            /* Start A/D Conversion 				*/
+	LPC_ADC->ADCR |=  (1<<24);            /* Start A/D Conversion 							*/
 }				 

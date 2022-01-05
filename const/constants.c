@@ -27,11 +27,52 @@ uint8_t paddle_threshold = 10; // Don't move paddle if next position is within t
 
 uint16_t ball_width = 5;
 uint16_t ball_height = 5;
-uint16_t ball_x_position = 118;
-uint16_t ball_y_position = 158;
-uint16_t ball_x_direction = 1;
-uint16_t ball_y_direction = 1;
+uint16_t ball_x_position = 113;
+uint16_t ball_y_position = 43;
+int ball_x_direction = 1;
+int ball_y_direction = 1;
+uint8_t ball_fps = 30;
 
 /* GAMEPLAY */
 
 unsigned int game_status = NOT_PLAYING;
+
+/* SOUND */
+
+uint16_t SinTable[45] = 
+{
+    410, 467, 523, 576, 627, 673, 714, 749, 778,
+    799, 813, 819, 817, 807, 789, 764, 732, 694, 
+    650, 602, 550, 495, 438, 381, 324, 270, 217,
+    169, 125, 87 , 55 , 30 , 12 , 2  , 0  , 6  ,   
+    20 , 41 , 70 , 105, 146, 193, 243, 297, 353
+};
+
+uint8_t wall_bounce_sound = 5;
+uint8_t paddle_bounce_sound = 7;
+uint8_t sound_lenght = 1;
+
+//const int freqs[8] = {4240, 3779, 3367, 3175, 2834, 2525, 2249, 2120};
+/* 
+131Hz		k=4240 C3
+147Hz		k=3779
+165Hz		k=3367
+175Hz		k=3175
+196Hz		k=2834		
+220Hz		k=2525
+247Hz		k=2249
+262Hz		k=2120 C4
+*/
+
+const int freqs[8] = {2120, 1890, 1684, 1592, 1417, 1263, 1125, 1062};
+/*
+262Hz	k=2120		c4
+294Hz	k=1890		
+330Hz	k=1684		
+349Hz	k=1592		
+392Hz	k=1417		
+440Hz	k=1263		
+494Hz	k=1125		
+523Hz	k=1062		c5
+
+*/

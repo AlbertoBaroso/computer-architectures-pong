@@ -10,3 +10,5 @@
 .\gui.o: GUI\GUI.h
 .\gui.o: GUI\../GLCD/GLCD.h
 .\gui.o: GUI\../const/constants.h
+.\gui.o: GUI\../timer/timer.h
+.\gui.o: GUI\../utility/utility.h

@@ -11,3 +11,4 @@
 .\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.6.0\Device\Include\system_LPC17xx.h
 .\utility.o: utility\../const/constants.h
 .\utility.o: utility\../const/../GLCD/GLCD.h
+.\utility.o: utility\../timer/timer.h

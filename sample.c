@@ -30,6 +30,8 @@
 #include "RIT/RIT.h"
 #include "adc/adc.h"
 #include "const/constants.h"
+#include "utility/utility.h"
+#include "button_EXINT/button.h"
 
 #ifdef SIMULATOR
 extern uint8_t
@@ -38,33 +40,49 @@ extern uint8_t
                 // but since it is RO, it needs more work)
 #endif
 
+extern uint16_t score;
+extern uint16_t score_record;
+
 int main(void) {
 
     uint32_t rit_time;
     uint32_t timer0_time;
+    uint32_t timer1_time;
 
+		/* K = Freq[1/s] * Time[s] */
+	
     rit_time = 0x4C4B40;
     timer0_time = 0x98968;
+		timer1_time = 0x4C4B40;
     // TODO: CALCULATE TIMES BASED ON fps "CONSTANT"
     #ifdef SIMULATOR
-        timer0_time = 0xCB735; // 30 FPS // 2500000 / fps;
-            rit_time =  (100000000 / paddle_fps);  // 6 FPS: FE 502A
+        //rit_time =  100000000 / paddle_fps;
+        timer0_time = 2500000 / ball_fps; 
+				timer1_time = 2500000 / paddle_fps; // 6 FPS: FE502A
     #endif
 
-    game_status = NOT_PLAYING;
+    //game_status = NOT_PLAYING;
+		// TODO: MAYBE PUT IN init_game()?
+    game_status = PLAYING;
+		score_record = 100;
+		score = 0;
 	
-	SystemInit(); /* System Initialization (i.e., PLL)  */
+		SystemInit(); /* System Initialization (i.e., PLL)  */
 
     LCD_Initialization();
     init_GUI();
+		BUTTON_init();
     ADC_init();           /* ADC Initialization 					*/
     init_RIT(rit_time);
     init_timer(0, timer0_time, 0);
+    init_timer(1, timer1_time, 0);
+		init_DAC();
 
-    enable_RIT();         /* RIT enabled         						*/
+		enable_RIT();   // RIT: Debouncing buttons
     enable_timer(0);	// Timer 0: Move ball
+    enable_timer(1);	// Timer 1: Move paddle (start ADC conversion)
 
-	LPC_SC->PCON |= 0x1; /* power-down mode */
+		LPC_SC->PCON |= 0x1; /* power-down mode */
     LPC_SC->PCON &= ~(0x2);
 
     while (1) {

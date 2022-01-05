@@ -18,7 +18,7 @@
 /*----------------------------------------------------------------------------
   A/D IRQ: Executed when A/D Conversion is ready (signal from ADC peripheral)
  *----------------------------------------------------------------------------*/
-
+/*
 unsigned short AD_current;
 unsigned short AD_last = 0xFF;
 
@@ -30,7 +30,7 @@ unsigned short measures_filled = 0; // TODO: RESET ON GAMEOVER
 void ADC_IRQHandler(void) {
 	
 	// current_position GENERATED IS IN RANGE [0, 209]
-	AD_current = ((LPC_ADC->ADGDR >> 4) & 0xFFF); /* Read Conversion Result */
+	AD_current = ((LPC_ADC->ADGDR >> 4) & 0xFFF); // Read Conversion Result
 	
 	if (AD_current != AD_last) {
 			
@@ -63,7 +63,7 @@ void ADC_IRQHandler(void) {
 			avg_measure = (max_measure + min_measure) >> 1;
 			max_diff = positive_value(max_diff_measure - avg_measure);
 			
-			/* Find most different measure to exclude it */
+			// Find most different measure to exclude it
 			for(i=1; i<measures_amount; i++) {
 				int new_diff = positive_value(measures[i] - avg_measure);
 				if(new_diff > max_diff) {
@@ -72,13 +72,13 @@ void ADC_IRQHandler(void) {
 				} 
 			}
 			
-			/* Calculate average measures among similar measures */
+			// Calculate average measures among similar measures //
 			for(i=0; i<measures_amount; i++)
 				if(measures[i] != max_diff_measure)
 					avg_similar_measures += measures[i];
 			avg_similar_measures = avg_similar_measures >> 1;
 			
-			/* Draw paddle in new position */
+			// Draw paddle in new position //
 			if(paddle_x != avg_similar_measures) {
 				draw_paddle(paddle_x, avg_similar_measures);
 				paddle_x = avg_similar_measures;
@@ -90,8 +90,9 @@ void ADC_IRQHandler(void) {
 	}
 	AD_last = AD_current;
 }
+*/
 
-/*
+
 unsigned short AD_current;
 unsigned short AD_last = 0xFF;
 
@@ -116,6 +117,5 @@ void ADC_IRQHandler(void) {
         AD_last = AD_current;
     }
 
-
 }
-*/
+

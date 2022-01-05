@@ -10,3 +10,4 @@
 .\lib_rit.o: RIT\RIT.h
 .\lib_rit.o: RIT\../adc/adc.h
 .\lib_rit.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\lib_rit.o: RIT\../priority/priority.h

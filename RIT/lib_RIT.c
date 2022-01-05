@@ -9,6 +9,7 @@
 *********************************************************************************************************/
 #include "lpc17xx.h"
 #include "RIT.h"
+#include "../priority/priority.h"
 
 /******************************************************************************
 ** Function name:		enable_RIT
@@ -57,8 +58,7 @@ void reset_RIT( void )
 
 uint32_t init_RIT ( uint32_t RITInterval )
 {
-  
-	
+ 	
   LPC_SC->PCLKSEL1  &= ~(3<<26);
   LPC_SC->PCLKSEL1  |=  (1<<26);   // RIT Clock = CCLK
 	LPC_SC->PCONP     |=  (1<<16);   // Enable power for RIT
@@ -69,6 +69,7 @@ uint32_t init_RIT ( uint32_t RITInterval )
 	LPC_RIT->RICOUNTER = 0;          // Set count value to 0
 	
 	NVIC_EnableIRQ(RIT_IRQn);
+	NVIC_SetPriority(RIT_IRQn, RIT_priority);
   return (0);
 }
 

@@ -15,3 +15,5 @@
 .\sample.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\sample.o: adc/adc.h
 .\sample.o: const/constants.h
+.\sample.o: utility/utility.h
+.\sample.o: button_EXINT/button.h

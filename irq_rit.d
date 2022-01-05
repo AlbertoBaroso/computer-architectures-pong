@@ -10,3 +10,4 @@
 .\irq_rit.o: C:\Users\alberto\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.6.0\Device\Include\system_LPC17xx.h
 .\irq_rit.o: RIT\../adc/adc.h
 .\irq_rit.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\irq_rit.o: RIT\../button_EXINT/button.h

@@ -30,10 +30,11 @@ extern uint16_t paddle_y;
 
 extern uint16_t ball_x_position;
 extern uint16_t ball_y_position;
-extern uint16_t ball_x_direction;
-extern uint16_t ball_y_direction;
+extern int ball_x_direction;
+extern int ball_y_direction;
 extern uint16_t ball_height;
 extern uint16_t ball_width;
+extern uint8_t ball_fps;
 
 /* GAMEPLAY */
 
@@ -42,3 +43,11 @@ extern uint16_t ball_width;
 #define PAUSED 3
 
 extern unsigned int game_status;
+
+/* SOUND */
+
+extern uint16_t SinTable[45];
+extern const int freqs[8];
+extern uint8_t wall_bounce_sound;
+extern uint8_t paddle_bounce_sound;
+extern uint8_t sound_lenght;
