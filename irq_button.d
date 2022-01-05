@@ -11,3 +11,8 @@
 .\irq_button.o: button_EXINT\../RIT/RIT.h
 .\irq_button.o: button_EXINT\../RIT/../adc/adc.h
 .\irq_button.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\irq_button.o: button_EXINT\../game/game.h
+.\irq_button.o: button_EXINT\../timer/timer.h
+.\irq_button.o: button_EXINT\../GUI/GUI.h
+.\irq_button.o: button_EXINT\../const/constants.h
+.\irq_button.o: button_EXINT\../const/../GLCD/GLCD.h

@@ -32,6 +32,7 @@
 #include "const/constants.h"
 #include "utility/utility.h"
 #include "button_EXINT/button.h"
+#include "game/game.h"
 
 #ifdef SIMULATOR
 extern uint8_t
@@ -39,9 +40,6 @@ extern uint8_t
                 // find the symbol (can be placed also inside system_LPC17xx.h
                 // but since it is RO, it needs more work)
 #endif
-
-extern uint16_t score;
-extern uint16_t score_record;
 
 int main(void) {
 
@@ -62,15 +60,8 @@ int main(void) {
     #endif
 
     //game_status = NOT_PLAYING;
-		// TODO: MAYBE PUT IN init_game()?
-    game_status = PLAYING;
-		score_record = 100;
-		score = 0;
 	
 		SystemInit(); /* System Initialization (i.e., PLL)  */
-
-    LCD_Initialization();
-    init_GUI();
 		BUTTON_init();
     ADC_init();           /* ADC Initialization 					*/
     init_RIT(rit_time);
@@ -79,8 +70,11 @@ int main(void) {
 		init_DAC();
 
 		enable_RIT();   // RIT: Debouncing buttons
-    enable_timer(0);	// Timer 0: Move ball
-    enable_timer(1);	// Timer 1: Move paddle (start ADC conversion)
+
+
+		game_init();	// TODO: REMOVE
+		game_start();	// TODO: REMOVE
+		
 
 		LPC_SC->PCON |= 0x1; /* power-down mode */
     LPC_SC->PCON &= ~(0x2);

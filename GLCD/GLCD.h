@@ -89,11 +89,14 @@
 /* Private function prototypes -----------------------------------------------*/
 void LCD_Initialization(void);
 void LCD_Clear(uint16_t Color);
-uint16_t LCD_GetPoint(uint16_t Xpos,uint16_t Ypos);
-void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point);
+uint16_t LCD_GetPoint(uint16_t Xpos, uint16_t Ypos );
+void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point );
 void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t color );
-void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor );
-void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
+void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor, uint16_t size );
+void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor, uint16_t size );
+
+void PutChar_but_only_in_rectangle( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
+void GUI_Text_but_only_in_rectangle(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 
 #endif 
 

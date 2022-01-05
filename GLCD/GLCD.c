@@ -22,6 +22,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "GLCD.h" 
 #include "AsciiLib.h"
+#include "../GUI/GUI.h"
 
 /* Private variables ---------------------------------------------------------*/
 static uint8_t LCD_Code;
@@ -608,7 +609,7 @@ void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t
 * Return         : None
 * Attention		 : None
 *******************************************************************************/
-void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor )
+void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor, uint16_t size )
 {
 	uint16_t i, j;
     uint8_t buffer[16], tmp_char;
@@ -620,11 +621,49 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
         {
             if( ((tmp_char >> (7 - j)) & 0x01) == 0x01 )
             {
-                LCD_SetPoint( Xpos + j, Ypos + i, charColor );  /* 字符颜色 */
+									if(size == 1)
+											LCD_SetPoint( Xpos + j, Ypos + i, charColor );  /* 字符颜色 */
+									else
+											draw_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, charColor);
             }
             else
             {
-                LCD_SetPoint( Xpos + j, Ypos + i, bkColor );  /* 背景颜色 */
+									if(size == 1)
+											LCD_SetPoint( Xpos + j, Ypos + i, bkColor );  /* 背景颜色 */
+									else
+											draw_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, bkColor);
+                
+            }
+        }
+    }
+}
+
+void PutChar_but_only_in_rectangle( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 )
+{
+	uint16_t i, j;
+    uint8_t buffer[16], tmp_char;
+    GetASCIICode(buffer,ASCI);  /* 取字模数据 */
+    for( i=0; i<16; i++ )
+    {
+        tmp_char = buffer[i];
+        for( j=0; j<8; j++ )
+        {
+            if( ((tmp_char >> (7 - j)) & 0x01) == 0x01 )
+            {
+									if(size == 1) {
+										if((Xpos + j >= x1 && Xpos + j <= x2) && (Ypos + i >= y1 && Ypos + i <= y2)) 
+											LCD_SetPoint( Xpos + j, Ypos + i, charColor ); 
+									} else
+											draw_rectangle_but_only_in_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, charColor, x1, y1, x2, y2);
+            }
+            else
+            {
+									if(size == 1) {
+										if((Xpos + j >= x1 && Xpos + j <= x2) && (Ypos + i >= y1 && Ypos + i <= y2)) 
+											LCD_SetPoint( Xpos + j, Ypos + i, bkColor );
+									} else
+											draw_rectangle_but_only_in_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, bkColor, x1, y1, x2, y2);
+                
             }
         }
     }
@@ -642,21 +681,48 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
 * Return         : None
 * Attention		 : None
 *******************************************************************************/
-void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor)
+void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor, uint16_t size)
 {
     uint8_t TempChar;
     do
     {
         TempChar = *str++;  
-        PutChar( Xpos, Ypos, TempChar, Color, bkColor );    
-        if( Xpos < MAX_X - 8 )
+        PutChar( Xpos, Ypos, TempChar, Color, bkColor, size);    
+        if( Xpos < MAX_X - 8 * size )
         {
-            Xpos += 8;
+            Xpos += 8 * size;
         } 
-        else if ( Ypos < MAX_Y - 16 )
+        else if ( Ypos < MAX_Y - 16 * size )
         {
             Xpos = 0;
-            Ypos += 16;
+            Ypos += 16 * size;
+        }   
+        else
+        {
+            Xpos = 0;
+            Ypos = 0;
+        }    
+    }
+    while ( *str != 0 );
+}
+
+void GUI_Text_but_only_in_rectangle(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+{
+    uint8_t TempChar;
+    do
+    {
+        TempChar = *str++;  
+				
+				PutChar_but_only_in_rectangle( Xpos, Ypos, TempChar, Color, bkColor, size, x1, y1, x2, y2);    
+        
+				if( Xpos < MAX_X - 8 * size )
+        {
+            Xpos += 8 * size;
+        } 
+        else if ( Ypos < MAX_Y - 16 * size )
+        {
+            Xpos = 0;
+            Ypos += 16 * size;
         }   
         else
         {

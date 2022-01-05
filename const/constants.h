@@ -10,6 +10,7 @@ extern uint16_t background_color;
 extern uint16_t paddle_color;
 extern uint16_t text_color;
 extern uint16_t ball_color;
+extern uint16_t score_color;
 
 /* FIELD */
 
@@ -36,13 +37,13 @@ extern uint16_t ball_height;
 extern uint16_t ball_width;
 extern uint8_t ball_fps;
 
-/* GAMEPLAY */
+/* TEXT */
 
-#define PLAYING 1
-#define NOT_PLAYING 2
-#define PAUSED 3
-
-extern unsigned int game_status;
+extern uint16_t score_text_size;
+extern uint16_t score_record_text_size;
+extern uint16_t score_record_y;
+extern uint16_t score_x;
+extern uint16_t score_y;
 
 /* SOUND */
 

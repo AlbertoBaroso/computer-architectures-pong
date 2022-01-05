@@ -10,5 +10,7 @@
 .\gui.o: GUI\GUI.h
 .\gui.o: GUI\../GLCD/GLCD.h
 .\gui.o: GUI\../const/constants.h
+.\gui.o: GUI\../game/game.h
 .\gui.o: GUI\../timer/timer.h
 .\gui.o: GUI\../utility/utility.h
+.\gui.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

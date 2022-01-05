@@ -7,6 +7,7 @@ uint16_t paddle_color = Green;
 uint16_t background_color = White;
 uint16_t text_color = Black;
 uint16_t ball_color = Black;
+uint16_t score_color = Blue;
 
 /* FIELD */
 
@@ -27,15 +28,19 @@ uint8_t paddle_threshold = 10; // Don't move paddle if next position is within t
 
 uint16_t ball_width = 5;
 uint16_t ball_height = 5;
-uint16_t ball_x_position = 113;
-uint16_t ball_y_position = 43;
+uint16_t ball_x_position = 205;
+uint16_t ball_y_position = 120;
 int ball_x_direction = 1;
 int ball_y_direction = 1;
 uint8_t ball_fps = 30;
 
-/* GAMEPLAY */
+/* TEXT */
 
-unsigned int game_status = NOT_PLAYING;
+uint16_t score_text_size = 4;
+uint16_t score_record_text_size = 2;
+uint16_t score_x = 10;
+uint16_t score_y = 150;
+uint16_t score_record_y = 10;
 
 /* SOUND */
 

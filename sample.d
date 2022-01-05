@@ -17,3 +17,4 @@
 .\sample.o: const/constants.h
 .\sample.o: utility/utility.h
 .\sample.o: button_EXINT/button.h
+.\sample.o: game/game.h

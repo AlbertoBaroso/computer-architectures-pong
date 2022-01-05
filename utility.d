@@ -12,3 +12,4 @@
 .\utility.o: utility\../const/constants.h
 .\utility.o: utility\../const/../GLCD/GLCD.h
 .\utility.o: utility\../timer/timer.h
+.\utility.o: utility\../game/game.h

@@ -9,6 +9,7 @@
 *********************************************************************************************************/
 #include "lpc17xx.h"
 #include "timer.h"
+#include "../priority/priority.h"
 
 /******************************************************************************
 ** Function name:		enable_timer
@@ -67,9 +68,9 @@ void reset_timer(uint8_t timer_num) {
             regVal |= 0x02;
             LPC_TIM0->TCR = regVal;
 						// Unset reset flag -> start counting again 
-            regVal = LPC_TIM0->TCR;
-            regVal &= ~(1 << 1);
-            LPC_TIM0->TCR = regVal;
+            //regVal = LPC_TIM0->TCR;
+            //regVal &= ~(1 << 1);
+            //LPC_TIM0->TCR = regVal;
         break;
         case 1:
 						// Set reset flag -> set count to 0
@@ -77,9 +78,9 @@ void reset_timer(uint8_t timer_num) {
             regVal |= 0x02;
             LPC_TIM1->TCR = regVal;
 						// Unset reset flag -> start counting again 
-            regVal = LPC_TIM1->TCR;
-            regVal &= ~(1 << 1);
-            LPC_TIM1->TCR = regVal;
+            //regVal = LPC_TIM1->TCR;
+            //regVal &= ~(1 << 1);
+            //LPC_TIM1->TCR = regVal;
         break;
         case 2:
 						// Set reset flag -> set count to 0
@@ -87,9 +88,9 @@ void reset_timer(uint8_t timer_num) {
             regVal |= 0x02;
             LPC_TIM2->TCR = regVal;
 						// Unset reset flag -> start counting again 
-            regVal = LPC_TIM2->TCR;
-            regVal &= ~(1 << 1);
-            LPC_TIM2->TCR = regVal;
+            //regVal = LPC_TIM2->TCR;
+            //regVal &= ~(1 << 1);
+            //LPC_TIM2->TCR = regVal;
         break;
         case 3:
 						// Set reset flag -> set count to 0
@@ -97,9 +98,9 @@ void reset_timer(uint8_t timer_num) {
             regVal |= 0x02;
             LPC_TIM3->TCR = regVal;
 						// Unset reset flag -> start counting again 
-            regVal = LPC_TIM3->TCR;
-            regVal &= ~(1 << 1);
-            LPC_TIM3->TCR = regVal;
+            //regVal = LPC_TIM3->TCR;
+            //regVal &= ~(1 << 1);
+            //LPC_TIM3->TCR = regVal;
         break;
     }
     return;
@@ -112,7 +113,7 @@ uint32_t init_timer(uint8_t timer_num, uint32_t TimerIntervalMR0, uint32_t Timer
           if(TimerIntervalMR1 != 0) 
               LPC_TIM0->MR1 = TimerIntervalMR1;
 
-//*** <<< start of configuration section MCR Timer 0 >>> ***
+					//*** <<< start of configuration section MCR Timer 0 >>> ***
           // <h> timer0 MCR
           //   <e.0> MR0I
           //	 <i> 1 Interrupt on MR0: an interrupt is generated when MR0 matches the
@@ -167,10 +168,10 @@ uint32_t init_timer(uint8_t timer_num, uint32_t TimerIntervalMR0, uint32_t Timer
           //*** <<< end of configuration section >>>    ***
 
 					NVIC_EnableIRQ(TIMER0_IRQn);
-          NVIC_SetPriority(TIMER0_IRQn, 4);		/* less priority than buttons */
+          NVIC_SetPriority(TIMER0_IRQn, tim0_priority);		/* less priority than buttons */
           //NVIC_SetPriority(TIMER0_IRQn, 0);       /* more priority than buttons */
           return (1);
-case 1:
+				case 1:
           LPC_TIM1->MR0 = TimerIntervalMR0;
           if(TimerIntervalMR1 != 0) 
               LPC_TIM1->MR1 = TimerIntervalMR1;
@@ -225,11 +226,11 @@ case 1:
           //	 <i> 1 Stop on MR3: the TC and PC will be stopped and TCR[3] will be set
           //to 0 if MR3 matches the TC 	 <i> 0 Feature disabled.
           //   </e>
-          LPC_TIM1->MCR = 9;
+          LPC_TIM1->MCR = 3;
           // </h>
 
           NVIC_EnableIRQ(TIMER1_IRQn);
-          NVIC_SetPriority(TIMER1_IRQn, 5); /* less priority than buttons and timer0*/
+          NVIC_SetPriority(TIMER1_IRQn, tim1_priority); /* less priority than buttons and timer0*/
           return (1);
         
         case 2:
@@ -287,11 +288,11 @@ case 1:
           //	 <i> 1 Stop on MR3: the TC and PC will be stopped and TCR[3] will be set
           //to 0 if MR3 matches the TC 	 <i> 0 Feature disabled.
           //   </e>
-          LPC_TIM2->MCR = 9;
+          LPC_TIM2->MCR = 3;
           // </h>
 
           NVIC_EnableIRQ(TIMER2_IRQn);
-          NVIC_SetPriority(TIMER2_IRQn, 6); /* less priority than buttons and timer0*/
+          NVIC_SetPriority(TIMER2_IRQn, tim2_priority); /* sound: highest timer priority */
           return (1);
         
         case 3:
@@ -353,7 +354,7 @@ case 1:
           // </h>
 
           NVIC_EnableIRQ(TIMER3_IRQn);
-          NVIC_SetPriority(TIMER3_IRQn, 7); /* less priority than buttons and timer0*/
+          NVIC_SetPriority(TIMER3_IRQn, tim3_priority); /* less priority than buttons and timer0*/
           return (1);
         
     }
