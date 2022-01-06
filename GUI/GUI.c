@@ -101,7 +101,7 @@ void draw_ball(void) {
 		int x_movement;
 		int y_movement;
 
-		if (ball_y_position + ball_height >= field_height) {
+		if (ball_y_position > field_height) {
 			// END GAME 
 			game_over();
 			return;
@@ -121,7 +121,7 @@ void draw_ball(void) {
 		}
 		
 		/* If ball is at paddle_y and is on top of paddle for at least one pixel => Bounce on paddle */
-		if (ball_y_position + ball_height >= paddle_y &&
+		if (ball_y_position + ball_height == paddle_y &&
 				((ball_x_position >= paddle_x &&
 					ball_x_position <= paddle_x + paddle_width) ||
 				 (ball_x_position + ball_width >= paddle_x &&
@@ -174,6 +174,10 @@ void draw_ball(void) {
 			int score_record_length = snprintf(NULL, 0, "%d", score_record);
 			int score_record_x = field_width - 10 - score_record_length * 8 * score_record_text_size;
 			
+			/* Cancel old ball */
+			draw_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width,
+											 ball_y_position + ball_height, background_color);
+			
 			/* Check if ball overlaps with score */
 			if(((ball_x_position >= score_x && ball_x_position <= score_x + score_length * score_text_size * 8) ||
 				  (ball_x_position + ball_width >= score_x && ball_x_position + ball_width <= score_x + score_length * score_text_size * 8)) && 
@@ -188,7 +192,7 @@ void draw_ball(void) {
 																			   score_color, background_color, score_text_size,
 																			   ball_x_position, ball_y_position, ball_x_position + ball_width, ball_y_position + ball_height);
 						
-			} else if (((ball_x_position >= score_record_x && ball_x_position <= score_record_x + score_length * score_record_text_size * 8) ||
+			} else if (((ball_x_position >= score_record_x && ball_x_position <= field_width - 10) ||
 				  (ball_x_position + ball_width >= score_record_x && ball_x_position + ball_width <= score_record_x + score_record_length * score_record_text_size * 8)) && 
 				 ((ball_y_position >= score_record_y && ball_y_position <= score_record_y + score_record_text_size * 16) || 
 					(ball_y_position + ball_height >= score_record_y && ball_y_position + ball_height <= score_record_y + score_record_text_size * 16))) {
@@ -203,11 +207,6 @@ void draw_ball(void) {
 																			 score_color, background_color, score_record_text_size, 
 																			 ball_x_position, ball_y_position, ball_x_position + ball_width, ball_y_position + ball_height);
 
-			} else {
-				
-				/* Cancel old ball */
-				draw_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width,
-											 ball_y_position + ball_height, background_color);
 			}
 		}
 		
@@ -228,10 +227,12 @@ void draw_ball(void) {
 		if (ball_y_position < field_border) {
 			y_movement = -(y_movement + (ball_y_position - field_border));
 			ball_y_position = field_border;
-		} else if (ball_y_position + ball_height >= paddle_y) {
-			y_movement = y_movement - (ball_y_position + ball_height - paddle_y);
-			ball_y_position = paddle_y - ball_height;
-		}
+		} 
+		// TODO: YOU CAN'T DO THIS OTHERWISE BALL DOESN'T FALL
+		//if (ball_y_position + ball_height >= paddle_y) {
+		//	y_movement = y_movement - (ball_y_position + ball_height - paddle_y);
+		//	ball_y_position = paddle_y - ball_height;
+		//}
 		
 		/*
 		{

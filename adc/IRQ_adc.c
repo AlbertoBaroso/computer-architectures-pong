@@ -18,7 +18,7 @@
 /*----------------------------------------------------------------------------
   A/D IRQ: Executed when A/D Conversion is ready (signal from ADC peripheral)
  *----------------------------------------------------------------------------*/
-/*
+
 unsigned short AD_current;
 unsigned short AD_last = 0xFF;
 
@@ -43,7 +43,7 @@ void ADC_IRQHandler(void) {
 		if(measure_index == measures_amount)
 			measure_index = 0;
 	
-		if(measures_filled > 2) {
+		if(measures_filled >= measures_amount - 1) {
 			
 			unsigned int avg_measure;
 			uint16_t max_diff_measure = measures[0];
@@ -52,7 +52,10 @@ void ADC_IRQHandler(void) {
 			int i;
 			int min_measure = -1;
 			int max_measure = -1;
+			int divisor = ((measures_amount - 1) >> 1);
+			int skipped = 0;
 			
+			// Find min and max measure
 			for(i=0; i<measures_amount; i++) {
 				if(min_measure == -1 || min_measure > measures[i])
 					min_measure = measures[i]; // Update new min measure in array
@@ -60,10 +63,11 @@ void ADC_IRQHandler(void) {
 					max_measure = measures[i];  // Update new max measure in array
 			}
 			
+			// Calculate average measure
 			avg_measure = (max_measure + min_measure) >> 1;
 			max_diff = positive_value(max_diff_measure - avg_measure);
 			
-			// Find most different measure to exclude it
+			// Find most different measure => discard it
 			for(i=1; i<measures_amount; i++) {
 				int new_diff = positive_value(measures[i] - avg_measure);
 				if(new_diff > max_diff) {
@@ -74,25 +78,30 @@ void ADC_IRQHandler(void) {
 			
 			// Calculate average measures among similar measures //
 			for(i=0; i<measures_amount; i++)
-				if(measures[i] != max_diff_measure)
+				if(measures[i] == max_diff_measure && skipped == 0)
+					skipped = 1;
+				else 
 					avg_similar_measures += measures[i];
-			avg_similar_measures = avg_similar_measures >> 1;
+			avg_similar_measures = avg_similar_measures >> divisor;
 			
 			// Draw paddle in new position //
-			if(paddle_x != avg_similar_measures) {
+			if(positive_value(avg_similar_measures - paddle_x) >= paddle_threshold) {
 				draw_paddle(paddle_x, avg_similar_measures);
 				paddle_x = avg_similar_measures;
 			}
 				
 		} else {
+			if(measures_filled > 0) {
+				draw_paddle(paddle_x, measures[measure_index - 1]);
+				paddle_x = measures[measure_index - 1];
+			}
 			measures_filled++;
 		}
 	}
 	AD_last = AD_current;
 }
-*/
 
-
+/*
 unsigned short AD_current;
 unsigned short AD_last = 0xFF;
 
@@ -118,4 +127,4 @@ void ADC_IRQHandler(void) {
     }
 
 }
-
+*/
