@@ -11,6 +11,7 @@ extern uint16_t paddle_color;
 extern uint16_t text_color;
 extern uint16_t ball_color;
 extern uint16_t score_color;
+extern uint16_t border_color;
 
 /* FIELD */
 
@@ -39,6 +40,7 @@ extern uint8_t ball_fps;
 
 /* TEXT */
 
+extern uint16_t you_lose_text_size;
 extern uint16_t score_text_size;
 extern uint16_t score_record_text_size;
 extern uint16_t score_record_y;

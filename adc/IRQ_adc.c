@@ -24,8 +24,8 @@ unsigned short AD_last = 0xFF;
 
 unsigned int measures_amount = 3;
 uint16_t measures[3];
-unsigned short measure_index = 0; // TODO: RESET ON GAMEOVER
-unsigned short measures_filled = 0; // TODO: RESET ON GAMEOVER
+unsigned short measure_index = 0;
+unsigned short measures_filled = 0;
 
 void ADC_IRQHandler(void) {
 	
@@ -45,35 +45,30 @@ void ADC_IRQHandler(void) {
 	
 		if(measures_filled >= measures_amount - 1) {
 			
-			unsigned int avg_measure;
-			uint16_t max_diff_measure = measures[0];
-			uint16_t max_diff;
+			uint16_t max_diff_measure;
+			int max_diff = -1;
 			int avg_similar_measures = 0;
-			int i;
-			int min_measure = -1;
-			int max_measure = -1;
+			int i, j;
 			int divisor = ((measures_amount - 1) >> 1);
 			int skipped = 0;
+			static int time = 0;
 			
-			// Find min and max measure
+			// Find most different measure from all other measures //
 			for(i=0; i<measures_amount; i++) {
-				if(min_measure == -1 || min_measure > measures[i])
-					min_measure = measures[i]; // Update new min measure in array
-				if(max_measure == -1 || max_measure < measures[i])
-					max_measure = measures[i];  // Update new max measure in array
-			}
-			
-			// Calculate average measure
-			avg_measure = (max_measure + min_measure) >> 1;
-			max_diff = positive_value(max_diff_measure - avg_measure);
-			
-			// Find most different measure => discard it
-			for(i=1; i<measures_amount; i++) {
-				int new_diff = positive_value(measures[i] - avg_measure);
-				if(new_diff > max_diff) {
+				int difference = 0;
+				for(j=0; j<measures_amount; j++) {
+					if(i != j) {
+						if(measures[i] > measures[j]) {
+							difference += measures[i] - measures[j];
+						} else {
+							difference += measures[j] - measures[i];
+						}
+					}
+				}
+				if(max_diff == -1 || difference > max_diff) {
+					max_diff = difference;
 					max_diff_measure = measures[i];
-					max_diff = new_diff;
-				} 
+				}
 			}
 			
 			// Calculate average measures among similar measures //
@@ -85,46 +80,31 @@ void ADC_IRQHandler(void) {
 			avg_similar_measures = avg_similar_measures >> divisor;
 			
 			// Draw paddle in new position //
-			if(positive_value(avg_similar_measures - paddle_x) >= paddle_threshold) {
-				draw_paddle(paddle_x, avg_similar_measures);
-				paddle_x = avg_similar_measures;
+			if(time == 0) {
+				
+				int last_position = 0; 
+				
+				time++;
+				if(paddle_x <= paddle_width + 1)
+					 last_position = field_width - paddle_width - 1;
+				draw_paddle(last_position, paddle_x);
+				
+			} else {
+				
+				if(positive_value(avg_similar_measures - paddle_x) >= paddle_threshold) {
+					draw_paddle(paddle_x, avg_similar_measures);
+					paddle_x = avg_similar_measures;
+				}
 			}
+			
 				
 		} else {
-			if(measures_filled > 0) {
-				draw_paddle(paddle_x, measures[measure_index - 1]);
-				paddle_x = measures[measure_index - 1];
-			}
+			//if(measures_filled > 0) {
+			//	draw_paddle(paddle_x, measures[measure_index - 1]);
+			//	paddle_x = measures[measure_index - 1];
+			//}
 			measures_filled++;
 		}
 	}
 	AD_last = AD_current;
 }
-
-/*
-unsigned short AD_current;
-unsigned short AD_last = 0xFF;
-
-uint16_t measures[3];
-unsigned short measure_index = 0;
-
-void ADC_IRQHandler(void) {
-    int max_value =
-            field_width - paddle_width - 1; // Display width - paddle width
-
-    // current_position GENERATED IS IN RANGE [0, 209]
-
-    AD_current = ((LPC_ADC->ADGDR >> 4) & 0xFFF); // Read Conversion Result
-
-    measures[measure_index] = AD_current;
-    measure_index = (measure_index + 1) % 3;
-
-    if (AD_current != AD_last) {
-        uint16_t last_position = AD_last * max_value / 0xFFF;
-        paddle_x = AD_current * max_value / 0xFFF;
-        draw_paddle(last_position, paddle_x);
-        AD_last = AD_current;
-    }
-
-}
-*/

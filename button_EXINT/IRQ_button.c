@@ -12,12 +12,17 @@ volatile int button0_pressed = 0;
 volatile int button1_pressed = 0;
 volatile int button2_pressed = 0;
 
-void button0_action (void) {	    // 
-
+void button0_action (void) {	    // PREPARE NEW GAME
+	if(game_status == GAME_ENDED) {
+			game_init();
+			game_status = READY_TO_PLAY;
+	}
 }
 
-void button1_action (void) {			//  
-
+void button1_action (void) {			// START NEW GAME
+	if(game_status == READY_TO_PLAY) {
+		game_start();
+	}
 }
 
 void button2_action (void) {			// PAUSE/RESUME GAME

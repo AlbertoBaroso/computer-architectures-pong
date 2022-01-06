@@ -1,3 +1,7 @@
+/*
+ *  PRIORITIES
+ */
+
 #include "LPC17xx.h"
 
 /* TIMER */

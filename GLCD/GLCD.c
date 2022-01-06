@@ -651,19 +651,42 @@ void PutChar_but_only_in_rectangle( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, 
             if( ((tmp_char >> (7 - j)) & 0x01) == 0x01 )
             {
 									if(size == 1) {
-										if((Xpos + j >= x1 && Xpos + j <= x2) && (Ypos + i >= y1 && Ypos + i <= y2)) 
-											LCD_SetPoint( Xpos + j, Ypos + i, charColor ); 
-									} else
-											draw_rectangle_but_only_in_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, charColor, x1, y1, x2, y2);
+										
+										uint16_t a = Xpos + j;
+										uint16_t b = Ypos + i;
+										if((a >= x1 && a <= x2) && (b >= y1 && b <= y2)) 
+											LCD_SetPoint( a, b, charColor ); 
+										
+									} else{
+										
+											uint16_t a = Xpos + j * size;
+											uint16_t b = Ypos + i * size;
+											uint16_t c = Xpos + (j + 1) * size;
+											uint16_t d = Ypos + (i + 1) * size;
+																				
+											if(((x1 >= a - 1 && x1 <= c + 1) || (x2 >= a - 1 && x2 <= c + 1)) && ((y1 >= b - 1 && y1 <= d + 1) || (y2 >= b - 1 && y2 <= d + 1)))
+												draw_rectangle_but_only_in_rectangle(a, b, c, d, charColor, x1, y1, x2, y2);
+									}
             }
             else
             {
 									if(size == 1) {
-										if((Xpos + j >= x1 && Xpos + j <= x2) && (Ypos + i >= y1 && Ypos + i <= y2)) 
-											LCD_SetPoint( Xpos + j, Ypos + i, bkColor );
-									} else
-											draw_rectangle_but_only_in_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, bkColor, x1, y1, x2, y2);
-                
+										
+										uint16_t a = Xpos + j;
+										uint16_t b = Ypos + i;
+										if((a >= x1 && a <= x2) && (b >= y1 && b <= y2)) 
+											LCD_SetPoint( a, b, bkColor ); 
+										
+									} else {
+										
+											uint16_t a = Xpos + j * size;
+											uint16_t b = Ypos + i * size;
+											uint16_t c = Xpos + (j + 1) * size;
+											uint16_t d = Ypos + (i + 1) * size;
+																				
+											if(((x1 >= a - 1 && x1 <= c + 1) || (x2 >= a - 1 && x2 <= c + 1)) && ((y1 >= b - 1 && y1 <= d + 1) || (y2 >= b - 1 && y2 <= d + 1)))
+												draw_rectangle_but_only_in_rectangle(a, b, c, d, bkColor, x1, y1, x2, y2);
+									}
             }
         }
     }
@@ -713,7 +736,8 @@ void GUI_Text_but_only_in_rectangle(uint16_t Xpos, uint16_t Ypos, uint8_t *str,u
     {
         TempChar = *str++;  
 				
-				PutChar_but_only_in_rectangle( Xpos, Ypos, TempChar, Color, bkColor, size, x1, y1, x2, y2);    
+				if((x1 >= Xpos && x1 <= Xpos + 8 * size) || (x2 >= Xpos && x2 <= Xpos + 8 * size))
+					PutChar_but_only_in_rectangle( Xpos, Ypos, TempChar, Color, bkColor, size, x1, y1, x2, y2);    
         
 				if( Xpos < MAX_X - 8 * size )
         {

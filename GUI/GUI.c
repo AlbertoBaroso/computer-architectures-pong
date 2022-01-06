@@ -1,3 +1,14 @@
+/*******************************************************************
+** ########################### File Info ###########################
+**
+** File name:           GUI.c
+** Last modified Date:  2022/01
+** Descriptions:        Functions to draw on the GUI
+** Correlated files:    GUI.h
+**
+** #################################################################
+*******************************************************************/
+
 #include "LPC17xx.h"
 #include "GUI.h"
 #include "../GLCD/GLCD.h" 
@@ -13,13 +24,26 @@
 */
 void init_GUI() {
 	
-	/* Color background */
-  LCD_Clear(background_color);
+	static int time = 0;
 	
-	/* Draw Left-Top-Right red borders */
-	draw_rectangle_vertical(0, field_border, field_border, paddle_y, Red);
-	draw_rectangle(0, 0, field_width, field_border, Red);
-	draw_rectangle_vertical(field_width - field_border, field_border, field_width, paddle_y, Red);
+	if(time == 0) {
+		
+		/* Color background */
+		LCD_Clear(background_color);
+		
+		/* Draw Left-Top-Right red borders */
+		draw_rectangle_vertical(0, field_border, field_border, paddle_y, border_color);
+		draw_rectangle(0, 0, field_width, field_border, border_color);
+		draw_rectangle_vertical(field_width - field_border, field_border, field_width, paddle_y, border_color);
+		
+		time++;
+		
+	} else {
+		
+		draw_rectangle((field_width >> 1) - 4 * 8 * you_lose_text_size, (field_height >> 1) - 8 * you_lose_text_size + 8, 
+									 (field_width >> 1) + 4 * 8 * you_lose_text_size, (field_height >> 1) + 8 * you_lose_text_size, background_color);
+		
+	}
 	
 	/* Draw score record in top right corner */
 	draw_score_record();
@@ -28,21 +52,6 @@ void init_GUI() {
 	draw_score();
 }
 
-/////// TODO: DELETE IF NOT USING EFFICIENT PADDLE SOLUTION
-int paddles_overlap(uint16_t current_position, uint16_t last_position) {
-	return (current_position > last_position && current_position < last_position + paddle_width) ||
-	   (last_position > current_position && last_position < current_position + paddle_width);
-}
-/////// TODO: DELETE IF NOT USING EFFICIENT PADDLE SOLUTION
-int in_field(uint16_t position) {
-	return position >= field_border && position < field_width - field_border;
-}
-///////////////////////////////////////////////////////////
-
-
-
-
-
 /*
 	Move paddle to current_position
 */
@@ -50,45 +59,44 @@ void draw_paddle( uint16_t last_position, uint16_t current_position ) {
 
 	if(game_status == PLAYING) {
 	
-		//////// INEFFICIENT BUT WORKS: ///////////
-		/*
-		if(current_position > 0)
-			draw_rectangle( 0, paddle_y, current_position, paddle_y + paddle_height, background_color );
-		draw_rectangle( current_position, paddle_y, current_position + paddle_width + 1, paddle_y + paddle_height, paddle_color );
-		if(current_position + paddle_width + 1 < field_width )
-			draw_rectangle( current_position + paddle_width + 1, paddle_y, field_width, paddle_y + paddle_height, background_color );
-		*/
-		///////////////////////////////////////////
-		
-		
-		if(paddles_overlap(last_position, current_position)) {
-			if(current_position > last_position) { /* Move paddle to the right */
-
-				/* Erase paddle from the left */
-				draw_rectangle(last_position, paddle_y, current_position, paddle_y + paddle_height, background_color);	
-				/* Draw paddle on the right */
-				draw_rectangle(last_position + paddle_width + 1, paddle_y, current_position + paddle_width + 1, paddle_y + paddle_height, paddle_color);
-
-			} else if(current_position < last_position) { /* Move paddle to the left */
-
-				/* Erase paddle from the right */
-				draw_rectangle(current_position + paddle_width + 1, paddle_y, last_position + paddle_width + 1, paddle_y + paddle_height, background_color);
-				/* Draw paddle on the left */
-				draw_rectangle(current_position, paddle_y, last_position, paddle_y + paddle_height, paddle_color);
-			}
-		} else {
-
-
-		//if(in_field(current_position) && in_field(last_position)) {
-
-
-				/* Erase whole old paddle */
-				draw_rectangle(last_position, paddle_y, last_position + paddle_width + 1, paddle_y + paddle_height, background_color);
-				/* Draw new whole paddle */
-				draw_rectangle(current_position, paddle_y, current_position + paddle_width + 1, paddle_y + paddle_height, paddle_color);
+		#ifdef SIMULATOR
 			
-			//}
-		}
+			if(paddles_overlap(last_position, current_position)) {
+				if(current_position > last_position) { /* Move paddle to the right */
+
+					/* Erase paddle from the left */
+					draw_rectangle(last_position, paddle_y, current_position, paddle_y + paddle_height, background_color);	
+					/* Draw paddle on the right */
+					draw_rectangle(last_position + paddle_width + 1, paddle_y, current_position + paddle_width + 1, paddle_y + paddle_height, paddle_color);
+
+				} else if(current_position < last_position) { /* Move paddle to the left */
+
+					/* Erase paddle from the right */
+					draw_rectangle(current_position + paddle_width + 1, paddle_y, last_position + paddle_width + 1, paddle_y + paddle_height, background_color);
+					/* Draw paddle on the left */
+					draw_rectangle(current_position, paddle_y, last_position, paddle_y + paddle_height, paddle_color);
+				}
+			} else {
+
+			//if(in_field(current_position) && in_field(last_position)) {
+
+					/* Erase whole old paddle */
+					draw_rectangle(last_position, paddle_y, last_position + paddle_width + 1, paddle_y + paddle_height, background_color);
+					/* Draw new whole paddle */
+					draw_rectangle(current_position, paddle_y, current_position + paddle_width + 1, paddle_y + paddle_height, paddle_color);
+				
+				//}
+			}
+		
+		#else
+		
+		if(current_position > 0)
+				draw_rectangle( 0, paddle_y, current_position, paddle_y + paddle_height, background_color );
+			draw_rectangle( current_position, paddle_y, current_position + paddle_width + 1, paddle_y + paddle_height, paddle_color );
+			if(current_position + paddle_width + 1 < field_width )
+				draw_rectangle( current_position + paddle_width + 1, paddle_y, field_width, paddle_y + paddle_height, background_color );
+		
+		#endif
 	
 	}
 	
@@ -108,8 +116,7 @@ void draw_ball(void) {
 		}
 
 		/* Bounce on lateral borders */
-		if (ball_x_position <= field_border ||
-				ball_x_position + ball_width >= field_width - field_border) {
+		if ((ball_x_position <= field_border || ball_x_position + ball_width >= field_width - field_border) && ball_y_position <= paddle_y) {
 			ball_x_direction = -ball_x_direction;
 			play_sound(wall_bounce_sound);
 		}
@@ -175,8 +182,12 @@ void draw_ball(void) {
 			int score_record_x = field_width - 10 - score_record_length * 8 * score_record_text_size;
 			
 			/* Cancel old ball */
-			draw_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width,
-											 ball_y_position + ball_height, background_color);
+			if(ball_y_position > paddle_y) {
+				draw_rectangle_but_not_in_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width, ball_y_position + ball_height, 
+																						background_color, paddle_x, paddle_y, paddle_x + paddle_width, paddle_y + paddle_height);
+			} else {
+				draw_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width, ball_y_position + ball_height, background_color);
+			}
 			
 			/* Check if ball overlaps with score */
 			if(((ball_x_position >= score_x && ball_x_position <= score_x + score_length * score_text_size * 8) ||
@@ -354,8 +365,13 @@ void draw_ball(void) {
 		*/
 		
 		/* Draw new ball */
-		draw_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width,
-									 ball_y_position + ball_height, ball_color);
+		if(ball_y_position > paddle_y) {
+			draw_rectangle_but_not_in_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width,
+										 ball_y_position + ball_height, ball_color, paddle_x, paddle_y, paddle_x + paddle_width, paddle_y + paddle_height);
+		} else {
+			draw_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width,
+										 ball_y_position + ball_height, ball_color);
+		}
 	}
 }
 
@@ -402,4 +418,12 @@ void draw_rectangle_but_only_in_rectangle( uint16_t x0, uint16_t y0, uint16_t x1
 		for(x = x0; x < x1; x++)
 			if((x >= x2 && x <= x3) && (y >= y2 && y <= y3)) 
 				LCD_SetPoint(x, y, color);
+}
+
+void draw_rectangle_but_not_in_rectangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t color, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3 ) {		 
+	int x, y;
+	for(y = y0; y < y1; y++)
+		for(x = x0; x < x1; x++)
+			if(!((x >= x2 && x <= x3) && (y >= y2 && y <= y3))) 
+				LCD_SetPoint(x, y, color);							 						 
 }

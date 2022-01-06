@@ -2,9 +2,8 @@
 **
 **                                 http://www.powermcu.com
 **
-**--------------File
-*Info---------------------------------------------------------------------------------
-** File name:               main.c
+**-------------- File Info -------------------------------------------------------------------------------
+** File name:               sample.c
 ** Descriptions:            The GLCD application function
 **
 **--------------------------------------------------------------------------------------------------------
@@ -17,8 +16,7 @@
 ** Modified by:             Paolo Bernardi & Alberto Baroso
 ** Modified date:           2022
 ** Version:                 v2.0
-** Descriptions:            basic program for LCD and Touch Panel teaching &
-*excercising
+** Descriptions:            The single-player PONG game
 **
 *********************************************************************************************************/
 
@@ -35,10 +33,7 @@
 #include "game/game.h"
 
 #ifdef SIMULATOR
-extern uint8_t
-    ScaleFlag;  // <- ScaleFlag needs to visible in order for the emulator to
-                // find the symbol (can be placed also inside system_LPC17xx.h
-                // but since it is RO, it needs more work)
+		extern uint8_t ScaleFlag;
 #endif
 
 int main(void) {
@@ -48,22 +43,22 @@ int main(void) {
     uint32_t timer1_time;
 
 		/* K = Freq[1/s] * Time[s] */
+		/* TIMING CALCULATION */
 	
     rit_time = 0x4C4B40;
     timer0_time = 0x98968;
 		timer1_time = 0x4C4B40;
-    // TODO: CALCULATE TIMES BASED ON fps "CONSTANT"
     #ifdef SIMULATOR
-        //rit_time =  100000000 / paddle_fps;
         timer0_time = 2500000 / ball_fps; 
-				timer1_time = 2500000 / paddle_fps; // 6 FPS: FE502A
+				timer1_time = 2500000 / paddle_fps;
     #endif
-
-    //game_status = NOT_PLAYING;
 	
-		SystemInit(); /* System Initialization (i.e., PLL)  */
-		BUTTON_init();
-    ADC_init();           /* ADC Initialization 					*/
+		/* PERIPHERALS INITIALIZATION */
+	
+		SystemInit();
+		LCD_Initialization();
+		BUTTON_init();	
+    ADC_init(); 
     init_RIT(rit_time);
     init_timer(0, timer0_time, 0);
     init_timer(1, timer1_time, 0);
@@ -71,12 +66,12 @@ int main(void) {
 
 		enable_RIT();   // RIT: Debouncing buttons
 
-
 		game_init();	// TODO: REMOVE
 		game_start();	// TODO: REMOVE
-		
 
-		LPC_SC->PCON |= 0x1; /* power-down mode */
+		/* Power-Down Mode */
+
+		LPC_SC->PCON |= 0x1; 
     LPC_SC->PCON &= ~(0x2);
 
     while (1) {

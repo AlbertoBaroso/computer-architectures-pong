@@ -1,3 +1,14 @@
+/*******************************************************************
+** ########################### File Info ###########################
+**
+** File name:           constants.c
+** Last modified Date:  2022/01
+** Descriptions:        constant values common to all files
+** Correlated files:    constants.h
+**
+** #################################################################
+*******************************************************************/
+
 #include "../GLCD/GLCD.h"
 #include "constants.h"
 
@@ -8,6 +19,7 @@ uint16_t background_color = White;
 uint16_t text_color = Black;
 uint16_t ball_color = Black;
 uint16_t score_color = Blue;
+uint16_t border_color = Red;
 
 /* FIELD */
 
@@ -29,13 +41,14 @@ uint8_t paddle_threshold = 10; // Don't move paddle if next position is within t
 uint16_t ball_width = 5;
 uint16_t ball_height = 5;
 uint16_t ball_x_position = 205;
-uint16_t ball_y_position = 120;
+uint16_t ball_y_position = 130;
 int ball_x_direction = 1;
 int ball_y_direction = 1;
 uint8_t ball_fps = 30;
 
 /* TEXT */
 
+uint16_t you_lose_text_size = 2;
 uint16_t score_text_size = 4;
 uint16_t score_record_text_size = 2;
 uint16_t score_x = 10;
