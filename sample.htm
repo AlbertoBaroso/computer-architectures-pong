@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\sample.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\sample.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Jan 07 18:01:21 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Jan 07 20:20:28 2022
 <BR><P>
 <H3>Maximum Stack Usage =        480 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -219,7 +219,7 @@ Global Symbols
 <P><STRONG><a name="[b3]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[41]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; game_init &rArr; init_GUI &rArr; draw_score_record &rArr; GUI_Text_but_only_different_characters &rArr; PutChar &rArr; draw_rectangle &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -395,7 +395,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[42]"></a>main</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, sample.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
 <LI>Call Chain = main &rArr; game_init &rArr; init_GUI &rArr; draw_score_record &rArr; GUI_Text_but_only_different_characters &rArr; PutChar &rArr; draw_rectangle &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;play_sound
@@ -645,8 +645,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_GUI
 </UL>
 
-<P><STRONG><a name="[71]"></a>init_GUI</STRONG> (Thumb, 238 bytes, Stack size 24 bytes, gui.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
+<P><STRONG><a name="[71]"></a>init_GUI</STRONG> (Thumb, 240 bytes, Stack size 32 bytes, gui.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
 <LI>Call Chain = init_GUI &rArr; draw_score_record &rArr; GUI_Text_but_only_different_characters &rArr; PutChar &rArr; draw_rectangle &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_rectangle_vertical
@@ -678,7 +678,7 @@ Global Symbols
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_ball_efficient
 </UL>
 
-<P><STRONG><a name="[75]"></a>move_ball_efficient</STRONG> (Thumb, 2130 bytes, Stack size 152 bytes, gui.o(.text))
+<P><STRONG><a name="[75]"></a>move_ball_efficient</STRONG> (Thumb, 2128 bytes, Stack size 152 bytes, gui.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 464 + Unknown Stack Size
 <LI>Call Chain = move_ball_efficient &rArr; GUI_Text_but_only_in_rectangles &rArr; PutChar_but_only_in_rectangles &rArr; draw_rectangle_but_only_in_rectangles &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
@@ -727,7 +727,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[2a]"></a>RIT_IRQHandler</STRONG> (Thumb, 270 bytes, Stack size 8 bytes, irq_rit.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 312 + Unknown Stack Size
 <LI>Call Chain = RIT_IRQHandler &rArr; button0_action &rArr; game_init &rArr; init_GUI &rArr; draw_score_record &rArr; GUI_Text_but_only_different_characters &rArr; PutChar &rArr; draw_rectangle &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_RIT
@@ -806,7 +806,7 @@ Global Symbols
 <P><STRONG><a name="[bc]"></a>in_field</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, utility.o(.text), UNUSED)
 
 <P><STRONG><a name="[79]"></a>button0_action</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, irq_button.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
 <LI>Call Chain = button0_action &rArr; game_init &rArr; init_GUI &rArr; draw_score_record &rArr; GUI_Text_but_only_different_characters &rArr; PutChar &rArr; draw_rectangle &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;game_init
@@ -867,7 +867,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[52]"></a>game_init</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, game.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
 <LI>Call Chain = game_init &rArr; init_GUI &rArr; draw_score_record &rArr; GUI_Text_but_only_different_characters &rArr; PutChar &rArr; draw_rectangle &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_GUI
@@ -887,7 +887,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button1_action
 </UL>
 
-<P><STRONG><a name="[76]"></a>game_over</STRONG> (Thumb, 274 bytes, Stack size 32 bytes, game.o(.text))
+<P><STRONG><a name="[76]"></a>game_over</STRONG> (Thumb, 312 bytes, Stack size 32 bytes, game.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
 <LI>Call Chain = game_over &rArr; GUI_Text &rArr; PutChar &rArr; draw_rectangle &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>

@@ -37,17 +37,22 @@ void init_GUI() {
 		draw_rectangle_vertical(0, field_border, field_border, paddle_y, border_color);
 		draw_rectangle(0, 0, field_width, field_border, border_color);
 		draw_rectangle_vertical(field_width - field_border, field_border, field_width, paddle_y, border_color);
-	
-		GUI_Text((field_width >> 1) - 80, (field_height >> 1) - 40, (uint8_t *)"Press KEY 1 to Start", text_color, background_color, 1);
 		
 		time++;
 		
 	} else {
 		
-		draw_rectangle((field_width >> 1) - 4 * 8 * you_lose_text_size, (field_height >> 1) - 8 * you_lose_text_size + 8, 
-									 (field_width >> 1) + 4 * 8 * you_lose_text_size, (field_height >> 1) + 8 * you_lose_text_size, background_color);
+		int half_field_width = (field_width >> 1);
+		int half_field_height = (field_height >> 1);
+		
+		/* Cancel "You Lose" text */
+		draw_rectangle(half_field_width - 4 * 8 * you_lose_text_size, half_field_height - 8 * you_lose_text_size + 8, 
+									 half_field_width + 4 * 8 * you_lose_text_size, half_field_height + 8 * you_lose_text_size, background_color);
 		
 	}
+	
+	/* Write instructions to play */
+	GUI_Text((field_width >> 1) - 84, (field_height >> 1) - 40, (uint8_t *)"  Press KEY1 to play ", text_color, background_color, 1);
 	
 	/* Draw score record in top right corner */
 	draw_score_record();

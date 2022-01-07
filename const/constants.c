@@ -19,10 +19,10 @@ uint8_t SCALE_FACTOR_APPROXIMATION = 25;
 /* COLORS */
 
 uint16_t paddle_color = Green;
-uint16_t background_color = White;
-uint16_t text_color = Black;
-uint16_t ball_color = Black;
-uint16_t score_color = Blue;
+uint16_t background_color = Black;
+uint16_t text_color = White;
+uint16_t ball_color = Magenta;
+uint16_t score_color = Yellow;
 uint16_t border_color = Red;
 
 /* FIELD */

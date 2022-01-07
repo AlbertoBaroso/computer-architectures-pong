@@ -18,7 +18,7 @@
 #include "../ADC/ADC.h"
 #include <stdio.h>
 
-uint32_t score = 100;
+uint32_t score = 0;
 uint32_t score_record = 100;
 
 uint32_t old_score = 0;						// Old scores, used for efficient character replacing on screen
@@ -60,9 +60,6 @@ void game_start() {
 	ADC_start_conversion();
 	
 	if(time == 0) {
-		/* Cancel "Press KEY 1 to Start" text */
-		draw_rectangle((field_width >> 1) - 80, (field_height >> 1) - 40, 
-									 (field_width >> 1) + 80, (field_height >> 1) - 24, background_color);
 			time++;
 	} else {
 				int last_position = 0; 
@@ -70,6 +67,10 @@ void game_start() {
 					 last_position = field_width - paddle_width - 2;
 				draw_paddle(last_position, paddle_x);	
 	}
+	
+	/* Cancel "Press KEY 1 to play" text */
+	draw_rectangle((field_width >> 1) - 68, (field_height >> 1) - 40, 
+								 (field_width >> 1) + 88, (field_height >> 1) - 24, background_color);
 	
 	/* Draw ball in initial position */
 	draw_rectangle(ball_x_position, ball_y_position, ball_x_position + ball_width,
@@ -90,7 +91,7 @@ void game_start() {
  *******************************************************************/
 void game_over() {
 	
-	int half_field_width = (field_width >> 1) - 8 * 8;  // 8 lenght of "YOU LOSE"
+	int half_field_width = (field_width >> 1);  // 8 lenght of "YOU LOSE"
   int half_field_height = (field_height >> 1) - 8;
 	int score_length = snprintf(NULL, 0, "%d", score);
 	int score_record_length = snprintf(NULL, 0, "%d", score_record);
@@ -109,13 +110,14 @@ void game_over() {
 								 ball_y_position + ball_height, background_color);
 	
   /* Clear paddle */
-  draw_rectangle(0, paddle_y, field_width, paddle_y + paddle_height,
-                 background_color);
+  draw_rectangle(0, paddle_y, field_width, paddle_y + paddle_height, background_color);
 	
-  /* Print game over message */
-  GUI_Text(half_field_width, half_field_height, (uint8_t *)"YOU LOSE",
+  /* Print game over messages */
+  GUI_Text(half_field_width - 8 * 8, half_field_height, (uint8_t *)"YOU LOSE",
            text_color, background_color, you_lose_text_size);
-
+  GUI_Text(half_field_width - 4 * 21, (field_height >> 1) - 40, (uint8_t *)"Press KEY0 to restart",
+					 text_color, background_color, 1);
+	
 	score = 0;
 }
 
