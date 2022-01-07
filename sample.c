@@ -56,18 +56,19 @@ int main(void) {
 		/* PERIPHERALS INITIALIZATION */
 	
 		SystemInit();
+		init_DAC();
+    ADC_init();
+		ADC_start_conversion();
 		LCD_Initialization();
+		play_sound(wall_bounce_sound);
 		BUTTON_init();	
-    ADC_init(); 
     init_RIT(rit_time);
     init_timer(0, timer0_time, 0);
-    init_timer(1, timer1_time, 0);
-		init_DAC();
+    init_timer(1, timer1_time, 0); 
 
 		enable_RIT();   // RIT: Debouncing buttons
 
-		game_init();	// TODO: REMOVE
-		game_start();	// TODO: REMOVE
+		game_init();
 
 		/* Power-Down Mode */
 

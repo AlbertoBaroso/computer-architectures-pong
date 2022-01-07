@@ -10,6 +10,7 @@
 .\irq_timer.o: C:\Users\alberto\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\mpu_armv7.h
 .\irq_timer.o: C:\Users\alberto\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.6.0\Device\Include\system_LPC17xx.h
 .\irq_timer.o: timer\../utility/utility.h
+.\irq_timer.o: timer\../game/game.h
 .\irq_timer.o: timer\../GUI/GUI.h
 .\irq_timer.o: timer\../adc/adc.h
 .\irq_timer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

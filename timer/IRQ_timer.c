@@ -12,6 +12,7 @@
 #include "../const/constants.h"
 #include "../utility/utility.h"
 #include "../GLCD/GLCD.h"
+#include "../game/game.h"
 #include "../GUI/GUI.h"
 #include "../adc/adc.h"
 #include "lpc17xx.h"
@@ -28,9 +29,9 @@
 ******************************************************************************/
 
 void TIMER0_IRQHandler(void) {
-  // TODO: CHECK GAME MODE IS ON
 
-  draw_ball();
+    if(game_status == PLAYING)
+      draw_ball();
 
   LPC_TIM0->IR = 1; /* clear interrupt flag */
   return;
@@ -48,9 +49,10 @@ void TIMER0_IRQHandler(void) {
 void TIMER1_IRQHandler(void) {
 
   /* ADC management */
-  ADC_start_conversion();
+  if(game_status == PLAYING)
+    ADC_start_conversion();
 
-	LPC_TIM1->IR = 1;			/* clear interrupt flag */
+  LPC_TIM1->IR = 1;			/* clear interrupt flag */
   return;
 }
 
@@ -64,14 +66,19 @@ void TIMER1_IRQHandler(void) {
 **
 ******************************************************************************/
 void TIMER2_IRQHandler(void) {
-  static int ticks = 0;
-	static int repetition = 0;
+    static int ticks = 0;
+		static int repetition = 0;
+
+    int ticks_limit = 45;
+    #ifdef SIMULATOR
+        ticks_limit = 35;
+    #endif
 
 	/* DAC management */	
 	LPC_DAC->DACR = SinTable[ticks] << 6;
 	ticks++;
 	
-	if(ticks == 45) {
+	if(ticks == ticks_limit) {
 		repetition++;
 		ticks = 0; 
 		if(repetition == sound_lenght) {

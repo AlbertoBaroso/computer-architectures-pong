@@ -4,8 +4,8 @@
 **
 **--------------File Info-------------------------------------------------------------------------------
 ** File name:			GLCD.c
-** Descriptions:		Has been tested SSD1289¡¢ILI9320¡¢R61505U¡¢SSD1298¡¢ST7781¡¢SPFD5408B¡¢ILI9325¡¢ILI9328¡¢
-**						HX8346A¡¢HX8347A
+** Descriptions:		Has been tested SSD1289ï¿½ï¿½ILI9320ï¿½ï¿½R61505Uï¿½ï¿½SSD1298ï¿½ï¿½ST7781ï¿½ï¿½SPFD5408Bï¿½ï¿½ILI9325ï¿½ï¿½ILI9328ï¿½ï¿½
+**						HX8346Aï¿½ï¿½HX8347A
 **------------------------------------------------------------------------------------------------------
 ** Created by:			AVRman
 ** Created date:		2012-3-10
@@ -64,7 +64,7 @@ static void LCD_Configuration(void)
 
 /*******************************************************************************
 * Function Name  : LCD_Send
-* Description    : LCDÐ´Êý¾Ý
+* Description    : LCDÐ´ï¿½ï¿½ï¿½ï¿½
 * Input          : - byte: byte to be sent
 * Output         : None
 * Return         : None
@@ -97,10 +97,10 @@ static void wait_delay(int count)
 
 /*******************************************************************************
 * Function Name  : LCD_Read
-* Description    : LCD¶ÁÊý¾Ý
+* Description    : LCDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 * Input          : - byte: byte to be read
 * Output         : None
-* Return         : ·µ»Ø¶ÁÈ¡µ½µÄÊý¾Ý
+* Return         : ï¿½ï¿½ï¿½Ø¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 * Attention		 : None
 *******************************************************************************/
 static __attribute__((always_inline)) uint16_t LCD_Read (void) 
@@ -121,8 +121,8 @@ static __attribute__((always_inline)) uint16_t LCD_Read (void)
 
 /*******************************************************************************
 * Function Name  : LCD_WriteIndex
-* Description    : LCDÐ´¼Ä´æÆ÷µØÖ·
-* Input          : - index: ¼Ä´æÆ÷µØÖ·
+* Description    : LCDÐ´ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
+* Input          : - index: ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
 * Output         : None
 * Return         : None
 * Attention		 : None
@@ -142,8 +142,8 @@ static __attribute__((always_inline)) void LCD_WriteIndex(uint16_t index)
 
 /*******************************************************************************
 * Function Name  : LCD_WriteData
-* Description    : LCDÐ´¼Ä´æÆ÷Êý¾Ý
-* Input          : - index: ¼Ä´æÆ÷Êý¾Ý
+* Description    : LCDÐ´ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+* Input          : - index: ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 * Output         : None
 * Return         : None
 * Attention		 : None
@@ -161,10 +161,10 @@ static __attribute__((always_inline)) void LCD_WriteData(uint16_t data)
 
 /*******************************************************************************
 * Function Name  : LCD_ReadData
-* Description    : ¶ÁÈ¡¿ØÖÆÆ÷Êý¾Ý
+* Description    : ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 * Input          : None
 * Output         : None
-* Return         : ·µ»Ø¶ÁÈ¡µ½µÄÊý¾Ý
+* Return         : ï¿½ï¿½ï¿½Ø¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 * Attention		 : None
 *******************************************************************************/
 static __attribute__((always_inline)) uint16_t LCD_ReadData(void)
@@ -302,7 +302,7 @@ void LCD_Initialization(void)
 	
 	LCD_Configuration();
 	delay_ms(100);
-	DeviceCode = LCD_ReadReg(0x0000);		/* ¶ÁÈ¡ÆÁID	*/	
+	DeviceCode = LCD_ReadReg(0x0000);		/* ï¿½ï¿½È¡ï¿½ï¿½ID	*/	
 	
 	if( DeviceCode == 0x9325 || DeviceCode == 0x9328 )	
 	{
@@ -371,8 +371,8 @@ void LCD_Initialization(void)
 		/* display on sequence */    
 		LCD_WriteReg(0x0007,0x0133);
 		
-		LCD_WriteReg(0x0020,0x0000);  /* ÐÐÊ×Ö·0 */                                                          
-		LCD_WriteReg(0x0021,0x0000);  /* ÁÐÊ×Ö·0 */     
+		LCD_WriteReg(0x0020,0x0000);  /* ï¿½ï¿½ï¿½ï¿½Ö·0 */                                                          
+		LCD_WriteReg(0x0021,0x0000);  /* ï¿½ï¿½ï¿½ï¿½Ö·0 */     
 	}
 
     delay_ms(50);   /* delay 50 ms */	
@@ -380,7 +380,7 @@ void LCD_Initialization(void)
 
 /*******************************************************************************
 * Function Name  : LCD_Clear
-* Description    : ½«ÆÁÄ»Ìî³ä³ÉÖ¸¶¨µÄÑÕÉ«£¬ÈçÇåÆÁ£¬ÔòÌî³ä 0xffff
+* Description    : ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0xffff
 * Input          : - Color: Screen Color
 * Output         : None
 * Return         : None
@@ -418,11 +418,11 @@ void LCD_Clear(uint16_t Color)
 
 /******************************************************************************
 * Function Name  : LCD_BGR2RGB
-* Description    : RRRRRGGGGGGBBBBB ¸ÄÎª BBBBBGGGGGGRRRRR ¸ñÊ½
-* Input          : - color: BRG ÑÕÉ«Öµ  
+* Description    : RRRRRGGGGGGBBBBB ï¿½ï¿½Îª BBBBBGGGGGGRRRRR ï¿½ï¿½Ê½
+* Input          : - color: BRG ï¿½ï¿½É«Öµ  
 * Output         : None
-* Return         : RGB ÑÕÉ«Öµ
-* Attention		 : ÄÚ²¿º¯Êýµ÷ÓÃ
+* Return         : RGB ï¿½ï¿½É«Öµ
+* Attention		 : ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 *******************************************************************************/
 static uint16_t LCD_BGR2RGB(uint16_t color)
 {
@@ -439,7 +439,7 @@ static uint16_t LCD_BGR2RGB(uint16_t color)
 
 /******************************************************************************
 * Function Name  : LCD_GetPoint
-* Description    : »ñÈ¡Ö¸¶¨×ù±êµÄÑÕÉ«Öµ
+* Description    : ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«Öµ
 * Input          : - Xpos: Row Coordinate
 *                  - Xpos: Line Coordinate 
 * Output         : None
@@ -486,7 +486,7 @@ uint16_t LCD_GetPoint(uint16_t Xpos,uint16_t Ypos)
 
 /******************************************************************************
 * Function Name  : LCD_SetPoint
-* Description    : ÔÚÖ¸¶¨×ù±ê»­µã
+* Description    : ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ê»­ï¿½ï¿½
 * Input          : - Xpos: Row Coordinate
 *                  - Ypos: Line Coordinate 
 * Output         : None
@@ -506,79 +506,79 @@ void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point)
 /******************************************************************************
 * Function Name  : LCD_DrawLine
 * Description    : Bresenham's line algorithm
-* Input          : - x1: AµãÐÐ×ù±ê
-*                  - y1: AµãÁÐ×ù±ê 
-*				   - x2: BµãÐÐ×ù±ê
-*				   - y2: BµãÁÐ×ù±ê 
-*				   - color: ÏßÑÕÉ«
+* Input          : - x1: Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*                  - y1: Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+*				   - x2: Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*				   - y2: Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+*				   - color: ï¿½ï¿½ï¿½ï¿½É«
 * Output         : None
 * Return         : None
 * Attention		 : None
 *******************************************************************************/	 
 void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t color )
 {
-    short dx,dy;      /* ¶¨ÒåX YÖáÉÏÔö¼ÓµÄ±äÁ¿Öµ */
-    short temp;       /* Æðµã ÖÕµã´óÐ¡±È½Ï ½»»»Êý¾ÝÊ±µÄÖÐ¼ä±äÁ¿ */
+    short dx,dy;      /* ï¿½ï¿½ï¿½ï¿½X Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÓµÄ±ï¿½ï¿½ï¿½Öµ */
+    short temp;       /* ï¿½ï¿½ï¿½ ï¿½Õµï¿½ï¿½Ð¡ï¿½È½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ */
 
-    if( x0 > x1 )     /* XÖáÉÏÆðµã´óÓÚÖÕµã ½»»»Êý¾Ý */
+    if( x0 > x1 )     /* Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     {
 	    temp = x1;
 		x1 = x0;
 		x0 = temp;   
     }
-    if( y0 > y1 )     /* YÖáÉÏÆðµã´óÓÚÖÕµã ½»»»Êý¾Ý */
+    if( y0 > y1 )     /* Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     {
 		temp = y1;
 		y1 = y0;
 		y0 = temp;   
     }
   
-	dx = x1-x0;       /* XÖá·½ÏòÉÏµÄÔöÁ¿ */
-	dy = y1-y0;       /* YÖá·½ÏòÉÏµÄÔöÁ¿ */
+	dx = x1-x0;       /* Xï¿½á·½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ */
+	dy = y1-y0;       /* Yï¿½á·½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-    if( dx == 0 )     /* XÖáÉÏÃ»ÓÐÔöÁ¿ »­´¹Ö±Ïß */ 
+    if( dx == 0 )     /* Xï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ */ 
     {
         do
         { 
-            LCD_SetPoint(x0, y0, color);   /* ÖðµãÏÔÊ¾ Ãè´¹Ö±Ïß */
+            LCD_SetPoint(x0, y0, color);   /* ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ ï¿½è´¹Ö±ï¿½ï¿½ */
             y0++;
         }
         while( y1 >= y0 ); 
 		return; 
     }
-    if( dy == 0 )     /* YÖáÉÏÃ»ÓÐÔöÁ¿ »­Ë®Æ½Ö±Ïß */ 
+    if( dy == 0 )     /* Yï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ë®Æ½Ö±ï¿½ï¿½ */ 
     {
         do
         {
-            LCD_SetPoint(x0, y0, color);   /* ÖðµãÏÔÊ¾ ÃèË®Æ½Ïß */
+            LCD_SetPoint(x0, y0, color);   /* ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ ï¿½ï¿½Ë®Æ½ï¿½ï¿½ */
             x0++;
         }
         while( x1 >= x0 ); 
 		return;
     }
-	/* ²¼À¼É­ººÄ·(Bresenham)Ëã·¨»­Ïß */
-    if( dx > dy )                         /* ¿¿½üXÖá */
+	/* ï¿½ï¿½ï¿½ï¿½É­ï¿½ï¿½Ä·(Bresenham)ï¿½ã·¨ï¿½ï¿½ï¿½ï¿½ */
+    if( dx > dy )                         /* ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ */
     {
-	    temp = 2 * dy - dx;               /* ¼ÆËãÏÂ¸öµãµÄÎ»ÖÃ */         
+	    temp = 2 * dy - dx;               /* ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ */         
         while( x0 != x1 )
         {
-	        LCD_SetPoint(x0,y0,color);    /* »­Æðµã */ 
-	        x0++;                         /* XÖáÉÏ¼Ó1 */
-	        if( temp > 0 )                /* ÅÐ¶ÏÏÂÏÂ¸öµãµÄÎ»ÖÃ */
+	        LCD_SetPoint(x0,y0,color);    /* ï¿½ï¿½ï¿½ï¿½ï¿½ */ 
+	        x0++;                         /* Xï¿½ï¿½ï¿½Ï¼ï¿½1 */
+	        if( temp > 0 )                /* ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ */
 	        {
-	            y0++;                     /* ÎªÓÒÉÏÏàÁÚµã£¬¼´£¨x0+1,y0+1£© */ 
+	            y0++;                     /* Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½x0+1,y0+1ï¿½ï¿½ */ 
 	            temp += 2 * dy - 2 * dx; 
 	 	    }
             else         
             {
-			    temp += 2 * dy;           /* ÅÐ¶ÏÏÂÏÂ¸öµãµÄÎ»ÖÃ */  
+			    temp += 2 * dy;           /* ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ */  
 			}       
         }
         LCD_SetPoint(x0,y0,color);
     }  
     else
     {
-	    temp = 2 * dx - dy;                      /* ¿¿½üYÖá */       
+	    temp = 2 * dx - dy;                      /* ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ */       
         while( y0 != y1 )
         {
 	 	    LCD_SetPoint(x0,y0,color);     
@@ -599,12 +599,12 @@ void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t
 
 /******************************************************************************
 * Function Name  : PutChar
-* Description    : ½«LcdÆÁÉÏÈÎÒâÎ»ÖÃÏÔÊ¾Ò»¸ö×Ö·û
-* Input          : - Xpos: Ë®Æ½×ø±ê 
-*                  - Ypos: ´¹Ö±×ø±ê  
-*				   - ASCI: ÏÔÊ¾µÄ×Ö·û
-*				   - charColor: ×Ö·ûÑÕÉ«   
-*				   - bkColor: ±³¾°ÑÕÉ« 
+* Description    : ï¿½ï¿½Lcdï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ê¾Ò»ï¿½ï¿½ï¿½Ö·ï¿½
+* Input          : - Xpos: Ë®Æ½ï¿½ï¿½ï¿½ï¿½ 
+*                  - Ypos: ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½  
+*				   - ASCI: ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ö·ï¿½
+*				   - charColor: ï¿½Ö·ï¿½ï¿½ï¿½É«   
+*				   - bkColor: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É« 
 * Output         : None
 * Return         : None
 * Attention		 : None
@@ -613,7 +613,7 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
 {
 	uint16_t i, j;
     uint8_t buffer[16], tmp_char;
-    GetASCIICode(buffer,ASCI);  /* È¡×ÖÄ£Êý¾Ý */
+    GetASCIICode(buffer,ASCI);  /* È¡ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ */
     for( i=0; i<16; i++ )
     {
         tmp_char = buffer[i];
@@ -622,14 +622,14 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
             if( ((tmp_char >> (7 - j)) & 0x01) == 0x01 )
             {
 									if(size == 1)
-											LCD_SetPoint( Xpos + j, Ypos + i, charColor );  /* ×Ö·ûÑÕÉ« */
+											LCD_SetPoint( Xpos + j, Ypos + i, charColor );  /* ï¿½Ö·ï¿½ï¿½ï¿½É« */
 									else
 											draw_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, charColor);
             }
             else
             {
 									if(size == 1)
-											LCD_SetPoint( Xpos + j, Ypos + i, bkColor );  /* ±³¾°ÑÕÉ« */
+											LCD_SetPoint( Xpos + j, Ypos + i, bkColor );  /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É« */
 									else
 											draw_rectangle(Xpos + j * size, Ypos + i * size, Xpos + (j + 1) * size, Ypos + (i + 1) * size, bkColor);
                 
@@ -642,7 +642,7 @@ void PutChar_but_only_in_rectangle( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, 
 {
 	uint16_t i, j;
     uint8_t buffer[16], tmp_char;
-    GetASCIICode(buffer,ASCI);  /* È¡×ÖÄ£Êý¾Ý */
+    GetASCIICode(buffer,ASCI);  /* È¡ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ */
     for( i=0; i<16; i++ )
     {
         tmp_char = buffer[i];
@@ -692,14 +692,70 @@ void PutChar_but_only_in_rectangle( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, 
     }
 }
 
+void PutChar_but_only_in_rectangles( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3, uint16_t x4, uint16_t y4 )
+{
+	uint16_t i, j;
+    uint8_t buffer[16], tmp_char;
+    GetASCIICode(buffer,ASCI);  /* È¡ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ */
+    for( i=0; i<16; i++ )
+    {
+        tmp_char = buffer[i];
+        for( j=0; j<8; j++ )
+        {
+            if( ((tmp_char >> (7 - j)) & 0x01) == 0x01 )
+            {
+									if(size == 1) {
+
+										uint16_t a = Xpos + j;
+										uint16_t b = Ypos + i;
+										if(((a >= x1 && a <= x2) && (b >= y1 && b <= y2)) || ((a >= x3 && a <= x4) && (b >= y3 && b <= y4)))
+											LCD_SetPoint( a, b, charColor );
+
+									} else{
+
+											uint16_t a = Xpos + j * size;
+											uint16_t b = Ypos + i * size;
+											uint16_t c = Xpos + (j + 1) * size;
+											uint16_t d = Ypos + (i + 1) * size;
+
+											if((((x1 >= a - 1 && x1 <= c + 1) || (x2 >= a - 1 && x2 <= c + 1)) && ((y1 >= b - 1 && y1 <= d + 1) || (y2 >= b - 1 && y2 <= d + 1))) ||
+                                               (((x3 >= a - 1 && x3 <= c + 1) || (x4 >= a - 1 && x4 <= c + 1)) && ((y3 >= b - 1 && y3 <= d + 1) || (y4 >= b - 1 && y4 <= d + 1))))
+												draw_rectangle_but_only_in_rectangles(a, b, c, d, charColor, x1, y1, x2, y2, x3, y3, x4, y4);
+									}
+            }
+            else
+            {
+									if(size == 1) {
+
+										uint16_t a = Xpos + j;
+										uint16_t b = Ypos + i;
+										if(((a >= x1 && a <= x2) && (b >= y1 && b <= y2)) || (((a >= x3 && a <= x4) && (b >= y3 && b <= y4))))
+											LCD_SetPoint( a, b, bkColor );
+
+									} else {
+
+											uint16_t a = Xpos + j * size;
+											uint16_t b = Ypos + i * size;
+											uint16_t c = Xpos + (j + 1) * size;
+											uint16_t d = Ypos + (i + 1) * size;
+
+                                           if((((x1 >= a - 1 && x1 <= c + 1) || (x2 >= a - 1 && x2 <= c + 1)) && ((y1 >= b - 1 && y1 <= d + 1) || (y2 >= b - 1 && y2 <= d + 1))) ||
+                                              (((x3 >= a - 1 && x3 <= c + 1) || (x4 >= a - 1 && x4 <= c + 1)) && ((y3 >= b - 1 && y3 <= d + 1) || (y4 >= b - 1 && y4 <= d + 1))))
+												draw_rectangle_but_only_in_rectangles(a, b, c, d, bkColor, x1, y1, x2, y2, x3, y3, x4, y4);
+									}
+            }
+        }
+    }
+}
+
 /******************************************************************************
 * Function Name  : GUI_Text
-* Description    : ÔÚÖ¸¶¨×ù±êÏÔÊ¾×Ö·û´®
-* Input          : - Xpos: ÐÐ×ù±ê
-*                  - Ypos: ÁÐ×ù±ê 
-*				   - str: ×Ö·û´®
-*				   - charColor: ×Ö·ûÑÕÉ«   
-*				   - bkColor: ±³¾°ÑÕÉ« 
+* Description    : ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Ö·ï¿½ï¿½ï¿½
+* Input          : - Xpos: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*                  - Ypos: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+*				   - str: ï¿½Ö·ï¿½ï¿½ï¿½
+*				   - charColor: ï¿½Ö·ï¿½ï¿½ï¿½É«   
+*				   - bkColor: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É« 
 * Output         : None
 * Return         : None
 * Attention		 : None
@@ -729,17 +785,32 @@ void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_
     while ( *str != 0 );
 }
 
-void GUI_Text_but_only_in_rectangle(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+/******************************************************************************
+* Function Name  : GUI_Text_but_only_different_characters
+* Description    : Draw text on screen but only the characters of "str" that differ from "different"
+* Input          : - Xpos: X pos of where to start to write text
+*                  - Ypos: Y pos of where to start to write text 
+*				   				 - str: string to write
+*				   				 - charColor: color of text
+*				   				 - bkColor: color of background
+*                  - size: text size
+*                  - different: string to compare "str" to, only different characters will be written on screen
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void GUI_Text_but_only_different_characters(uint16_t Xpos, uint16_t Ypos, uint8_t *str, uint16_t Color, uint16_t bkColor, uint16_t size, uint8_t *different)
 {
     uint8_t TempChar;
+    uint8_t DiffChar;
     do
     {
         TempChar = *str++;  
-				
-				if((x1 >= Xpos && x1 <= Xpos + 8 * size) || (x2 >= Xpos && x2 <= Xpos + 8 * size))
-					PutChar_but_only_in_rectangle( Xpos, Ypos, TempChar, Color, bkColor, size, x1, y1, x2, y2);    
-        
-				if( Xpos < MAX_X - 8 * size )
+				DiffChar = *different++;
+			
+				if(DiffChar == 0 || DiffChar != TempChar)
+					PutChar( Xpos, Ypos, TempChar, Color, bkColor, size);   
+
+        if( Xpos < MAX_X - 8 * size )
         {
             Xpos += 8 * size;
         } 
@@ -753,6 +824,99 @@ void GUI_Text_but_only_in_rectangle(uint16_t Xpos, uint16_t Ypos, uint8_t *str,u
             Xpos = 0;
             Ypos = 0;
         }    
+    }
+    while ( *str != 0 );
+}
+
+/******************************************************************************
+* Function Name  : GUI_Text_but_only_in_rectangle
+* Description    : Draw text on screen but only if pixel is inside a 2 rectangular area
+* Input          : - Xpos: X pos of where to start to write text
+*                  - Ypos: Y pos of where to start to write text 
+*				   				 - str: string to write
+*				   				 - charColor: color of text
+*				   				 - bkColor: color of background
+*                  - size: text size
+*                  - x1: x start of rectangular area
+*                  - y1: y start of rectangular area
+*                  - x2: x end of rectangular area
+*                  - y2: y end of rectangular area
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void GUI_Text_but_only_in_rectangle(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+{
+    uint8_t TempChar;
+    do
+    {
+        TempChar = *str++;
+
+        if((x1 >= Xpos && x1 <= Xpos + 8 * size) || (x2 >= Xpos && x2 <= Xpos + 8 * size))
+            PutChar_but_only_in_rectangle( Xpos, Ypos, TempChar, Color, bkColor, size, x1, y1, x2, y2);
+
+        if( Xpos < MAX_X - 8 * size )
+        {
+            Xpos += 8 * size;
+        }
+        else if ( Ypos < MAX_Y - 16 * size )
+        {
+            Xpos = 0;
+            Ypos += 16 * size;
+        }
+        else
+        {
+            Xpos = 0;
+            Ypos = 0;
+        }
+    }
+    while ( *str != 0 );
+}
+
+/******************************************************************************
+* Function Name  : GUI_Text_but_only_in_rectangles
+* Description    : Draw text on screen but only if pixel is inside one of 2 rectangular areas
+* Input          : - Xpos: X pos of where to start to write text
+*                  - Ypos: Y pos of where to start to write text 
+*				   				 - str: string to write
+*				   				 - charColor: color of text
+*				   				 - bkColor: color of background
+*                  - size: text size
+*                  - x1: x start of first rectangle
+*                  - y1: y start of first rectangle
+*                  - x2: x end of first rectangle
+*                  - y2: y end of first rectangle
+*                  - x3: x start of second rectangle
+*                  - y3: y start of second rectangle
+*                  - x4: x end of second rectangle
+*                  - y4: y end of second rectangle
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void GUI_Text_but_only_in_rectangles(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor, uint16_t size, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3, uint16_t x4, uint16_t y4)
+{
+    uint8_t TempChar;
+    do
+    {
+        uint16_t nextXpos = Xpos + 8 * size;
+        TempChar = *str++;
+
+        if((x1 >= Xpos && x1 <= nextXpos) || (x2 >= Xpos && x2 <= nextXpos) || (x3 >= Xpos && x3 <= nextXpos) || (x4 >= Xpos && x4 <= nextXpos))
+            PutChar_but_only_in_rectangles( Xpos, Ypos, TempChar, Color, bkColor, size, x1, y1, x2, y2, x3, y3, x4, y4);
+
+        if( Xpos < MAX_X - 8 * size )
+        {
+            Xpos += 8 * size;
+        }
+        else if ( Ypos < MAX_Y - 16 * size )
+        {
+            Xpos = 0;
+            Ypos += 16 * size;
+        }
+        else
+        {
+            Xpos = 0;
+            Ypos = 0;
+        }
     }
     while ( *str != 0 );
 }

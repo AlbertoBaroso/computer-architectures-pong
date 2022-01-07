@@ -49,8 +49,9 @@ extern uint16_t score_y;
 
 /* SOUND */
 
-extern uint16_t SinTable[45];
-extern const int freqs[8];
+extern uint8_t SCALE_FACTOR_APPROXIMATION;
 extern uint8_t wall_bounce_sound;
 extern uint8_t paddle_bounce_sound;
 extern uint8_t sound_lenght;
+extern uint16_t SinTable[45];
+extern const int freqs[8];

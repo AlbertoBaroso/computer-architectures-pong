@@ -28,7 +28,7 @@ void button1_action (void) {			// START NEW GAME
 void button2_action (void) {			// PAUSE/RESUME GAME
 	
 	int text_x = (field_width >> 1) - 11 * 4;
-	int text_y = (field_height >> 1) - 4;
+	int text_y = (field_height >> 1) - 40;
 	
 	if(game_status == PLAYING) {
 		

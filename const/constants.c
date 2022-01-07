@@ -12,6 +12,10 @@
 #include "../GLCD/GLCD.h"
 #include "constants.h"
 
+/* GENERAL */
+
+uint8_t SCALE_FACTOR_APPROXIMATION = 25;
+
 /* COLORS */
 
 uint16_t paddle_color = Green;
@@ -33,18 +37,18 @@ uint16_t paddle_width = 60;
 uint16_t paddle_height = 10;
 uint16_t paddle_x = 0;
 uint16_t paddle_y = 278;
-uint8_t paddle_fps = 1;
+uint8_t paddle_fps = 4;
 uint8_t paddle_threshold = 10; // Don't move paddle if next position is within this distance
 
 /* BALL */
 
 uint16_t ball_width = 5;
 uint16_t ball_height = 5;
-uint16_t ball_x_position = 205;
-uint16_t ball_y_position = 130;
-int ball_x_direction = 1;
-int ball_y_direction = 1;
-uint8_t ball_fps = 30;
+uint16_t ball_x_position = 204;
+uint16_t ball_y_position = 129;
+int ball_x_direction = 2;
+int ball_y_direction = 2;
+uint8_t ball_fps = 70;
 
 /* TEXT */
 
@@ -57,6 +61,10 @@ uint16_t score_record_y = 10;
 
 /* SOUND */
 
+uint8_t wall_bounce_sound = 7;
+uint8_t paddle_bounce_sound = 1;
+uint8_t sound_lenght = 1;
+
 uint16_t SinTable[45] = 
 {
     410, 467, 523, 576, 627, 673, 714, 749, 778,
@@ -66,24 +74,9 @@ uint16_t SinTable[45] =
     20 , 41 , 70 , 105, 146, 193, 243, 297, 353
 };
 
-uint8_t wall_bounce_sound = 5;
-uint8_t paddle_bounce_sound = 7;
-uint8_t sound_lenght = 1;
-
-//const int freqs[8] = {4240, 3779, 3367, 3175, 2834, 2525, 2249, 2120};
-/* 
-131Hz		k=4240 C3
-147Hz		k=3779
-165Hz		k=3367
-175Hz		k=3175
-196Hz		k=2834		
-220Hz		k=2525
-247Hz		k=2249
-262Hz		k=2120 C4
-*/
-
-const int freqs[8] = {2120, 1890, 1684, 1592, 1417, 1263, 1125, 1062};
+const int freqs[8] = {2120, 1820, 1734, 1592, 1417, 1342, 1125, 1062};
 /*
+
 262Hz	k=2120		c4
 294Hz	k=1890		
 330Hz	k=1684		
