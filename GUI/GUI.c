@@ -48,7 +48,6 @@ void init_GUI() {
 		/* Cancel "You Lose" text */
 		draw_rectangle(half_field_width - 4 * 8 * you_lose_text_size, half_field_height - 8 * you_lose_text_size + 8, 
 									 half_field_width + 4 * 8 * you_lose_text_size, half_field_height + 8 * you_lose_text_size, background_color);
-		
 	}
 	
 	/* Write instructions to play */

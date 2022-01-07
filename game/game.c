@@ -55,6 +55,7 @@ void game_start() {
 	ball_y_position = 129;
 	ball_x_direction = 2;
 	ball_y_direction = 2;
+	
   game_status = PLAYING;
 	
 	ADC_start_conversion();
@@ -100,6 +101,10 @@ void game_over() {
 	disable_timer(1);
 	
 	game_status = GAME_ENDED;
+
+	/* Clear bottom borders */
+	draw_rectangle(0, paddle_y, field_border, field_height, background_color);
+	draw_rectangle(field_width - field_border, paddle_y, field_width, field_height, background_color);
 
 	/* Clear score texts */
   draw_rectangle(field_width - 10 - 8 * score_record_length * score_record_text_size, 10, field_width - 10 + 1, 10 + 16 * score_record_text_size + 1, background_color);

@@ -45,7 +45,7 @@ int main(void) {
 		/* K = Freq[1/s] * Time[s] */
 		/* TIMING CALCULATION */
 	
-    rit_time = 0x4C4B40;
+     rit_time = 0x4C4B40;
     timer0_time = 0x98968;
 		timer1_time = 0x4C4B40;
     #ifdef SIMULATOR
