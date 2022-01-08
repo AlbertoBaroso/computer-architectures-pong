@@ -30,8 +30,8 @@
 
 void TIMER0_IRQHandler(void) {
 
-    if(game_status == PLAYING)
-      draw_ball();
+  if(game_status == PLAYING)
+    draw_ball();
 
   LPC_TIM0->IR = 1; /* clear interrupt flag */
   return;
@@ -67,28 +67,23 @@ void TIMER1_IRQHandler(void) {
 ******************************************************************************/
 void TIMER2_IRQHandler(void) {
     static int ticks = 0;
-		static int repetition = 0;
 
     int ticks_limit = 45;
     #ifdef SIMULATOR
         ticks_limit = 35;
     #endif
 
-	/* DAC management */	
-	LPC_DAC->DACR = SinTable[ticks] << 6;
-	ticks++;
-	
-	if(ticks == ticks_limit) {
-		repetition++;
-		ticks = 0; 
-		if(repetition == sound_lenght) {
+		/* DAC management */	
+		LPC_DAC->DACR = SinTable[ticks] << 6;
+		ticks++;
+		
+		if(ticks == ticks_limit) {
+			ticks = 0; 
 			disable_timer(2);
-			repetition = 0;
 		}
-	}
 
-	LPC_TIM2->IR = 1;			/* clear interrupt flag */
-  return;
+		LPC_TIM2->IR = 1;			/* clear interrupt flag */
+		return;
 }
 
 

@@ -58,17 +58,17 @@ int main(void) {
 		SystemInit();
 		init_DAC();
     ADC_init();
-		ADC_start_conversion();
+		ADC_start_conversion();						// Start conversion (avoids first 0 result)
 		LCD_Initialization();
-		play_sound(wall_bounce_sound);
+		play_sound(wall_bounce_sound);		// Initial sound
 		BUTTON_init();	
     init_RIT(rit_time);
-    init_timer(0, timer0_time, 0);
-    init_timer(1, timer1_time, 0); 
+    init_timer(0, timer0_time, 0);   	// Timer 0: Ball movement
+    init_timer(1, timer1_time, 0);    // Timer 1: Paddle movement
 
-		enable_RIT();   // RIT: Debouncing buttons
+		enable_RIT();   									// RIT: Debouncing buttons
 
-		game_init();
+		game_init();											// Initialize GUI
 
 		/* Power-Down Mode */
 

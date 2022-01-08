@@ -63,7 +63,6 @@ uint16_t score_record_y = 10;
 
 uint8_t wall_bounce_sound = 7;
 uint8_t paddle_bounce_sound = 1;
-uint8_t sound_lenght = 1;
 
 uint16_t SinTable[45] = 
 {

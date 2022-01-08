@@ -90,14 +90,11 @@ void draw_paddle( uint16_t last_position, uint16_t current_position ) {
 				}
 			} else {
 
-			//if(in_field(current_position) && in_field(last_position)) {
-
 					/* Erase whole old paddle */
 					draw_rectangle(last_position, paddle_y, last_position + paddle_width + 1, paddle_y + paddle_height, background_color);
 					/* Draw new whole paddle */
 					draw_rectangle(current_position, paddle_y, current_position + paddle_width + 1, paddle_y + paddle_height, paddle_color);
 				
-				//}
 			}
 		
 		#else
@@ -324,6 +321,12 @@ void draw_rectangle_but_not_in_rectangle(uint16_t x_start, uint16_t y_start, uin
 				LCD_SetPoint(x, y, color);							 						 
 }
 
+/*******************************************************************
+ ** Function name:     move_ball_inefficient
+ ** Descriptions:      completely erases old ball and rewrites new ball
+ ** Input parameters:  None
+ ** Returned value:    None
+ ********************************************************************/
 void move_ball_inefficient() {
 	
 			int x_movement;
@@ -401,6 +404,12 @@ void move_ball_inefficient() {
 
 }
 
+/*******************************************************************
+ ** Function name:     move_ball_efficient
+ ** Descriptions:      erases only portion of ball and writes only opposite portion of ball
+ ** Input parameters:  None
+ ** Returned value:    None
+ ********************************************************************/
 void move_ball_efficient() {
 	
 		int x_movement;
