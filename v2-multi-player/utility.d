@@ -1,0 +1,15 @@
+.\utility.o: utility\utility.c
+.\utility.o: utility\utility.h
+.\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.6.0\Device\Include\LPC17xx.h
+.\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h
+.\utility.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h
+.\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h
+.\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
+.\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\mpu_armv7.h
+.\utility.o: C:\Users\alberto\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.6.0\Device\Include\system_LPC17xx.h
+.\utility.o: utility\../GUI/GUI.h
+.\utility.o: utility\../const/constants.h
+.\utility.o: utility\../const/../GLCD/GLCD.h
+.\utility.o: utility\../timer/timer.h
+.\utility.o: utility\../game/game.h
